@@ -10,7 +10,7 @@ class BloodGlucoseView extends GetView<BloodGlucoseController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('blood_glucose'),
+        title: Text('blood_glucose'.tr),
         centerTitle: true,
       ),
       body: const Center(

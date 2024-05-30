@@ -14,7 +14,7 @@ class HomeView extends GetView<HomeController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('home'),
+        title: Text('home'.tr),
         centerTitle: false,
         actions: buildPopupMenu,
       ),
@@ -47,14 +47,14 @@ class HomeView extends GetView<HomeController> {
       PopupMenuButton(
         itemBuilder: (context) => [
           PopupMenuItem(
-            child: const Text('settings'),
+            child: Text('settings'.tr),
             onTap: () {
               // open profile setting
               Get.toNamed(Routes.SETTINGS);
             },
           ),
           PopupMenuItem(
-            child: const Text('share'),
+            child: Text('share'.tr),
             onTap: () {
               // TODO : share
             },

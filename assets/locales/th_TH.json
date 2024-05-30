@@ -1,0 +1,16 @@
+{
+  "home": "หน้าแรก",
+  "body_mass_index": "ดัชนีมวลกาย",
+  "blood_pressure": "ความดันโลหิต",
+  "blood_glucose": "น้ำตาลในเลือด",
+  "no_data_body_mass_index": "ไม่มีข้อมูลดัชนีมวลกาย",
+  "no_data_blood_pressure": "ไม่มีข้อมูลความดันโลหิต",
+  "no_data_blood_glucose": "ไม่มีข้อมูลน้ำตาลในเลือด",
+  "settings": "ตั้งค่า",
+  "share": "แชร์",
+  "name": "ชื่อ",
+  "gender": "เพศ",
+  "age": "อายุ",
+  "theme": "ธีม",
+  "locale": "ภาษา"
+}

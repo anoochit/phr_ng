@@ -63,20 +63,18 @@ class AppController extends GetxController {
       log('load profile data');
       // no profile data, create a template once
       if (value == null) {
-        final data = Profile(
-          name: 'John Doe',
-          gener: Gender.male,
-          age: 25,
-          image: '',
-          id: 1,
-          theme: ThemeMode.dark,
-          locale: LocaleMode.enUS,
-        );
+        final data = Profile()
+          ..name = 'John Doe'
+          ..gener = Gender.male
+          ..age = 25
+          ..image = ''
+          ..id = 1
+          ..theme = ThemeMode.dark
+          ..locale = LocaleMode.enUS;
         // write default value
         await _db.writeTxn(() async {
           await _db.profiles.put(data);
         });
-
         profile = data;
       } else {
         profile = value;

@@ -12,7 +12,7 @@ class SettingsView extends GetView {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('settings'),
+        title: Text('settings'.tr),
         centerTitle: true,
       ),
       body: GetBuilder<AppController>(
@@ -32,7 +32,9 @@ class SettingsView extends GetView {
                   title: name,
                   image: image,
                   backgroundColor: Colors.grey,
-                  onTap: () {},
+                  onTap: () {
+                    // TODO : Change avatar image
+                  },
                 ),
 
                 Gap(8.0),
@@ -50,45 +52,45 @@ class SettingsView extends GetView {
                 // change display name
                 ListTile(
                   leading: Icon(Icons.account_circle),
-                  title: Text('display_name'),
+                  title: Text('name'.tr),
                   onTap: () {
-                    // setting display name
+                    //  TODO : setting display name
                   },
                 ),
 
                 // change gender
                 ListTile(
                   leading: Icon(Icons.person),
-                  title: Text('gender'),
+                  title: Text('gender'.tr),
                   onTap: () {
-                    // setting gener
+                    // TODO : setting gener
                   },
                 ),
 
                 // change age
                 ListTile(
                   leading: Icon(Icons.person_add),
-                  title: Text('age'),
+                  title: Text('age'.tr),
                   onTap: () {
-                    // setting age
+                    // TODO : setting age
                   },
                 ),
 
                 // change theme
                 ListTile(
                   leading: Icon(Icons.contrast),
-                  title: Text('theme'),
+                  title: Text('theme'.tr),
                   onTap: () {
-                    // setting theme
+                    // TODO : setting theme
                   },
                 ),
 
                 // change locale
                 ListTile(
                   leading: Icon(Icons.language),
-                  title: Text('locale'),
+                  title: Text('locale'.tr),
                   onTap: () {
-                    // setting locale
+                    // TODO :setting locale
                   },
                 ),
               ],

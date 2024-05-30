@@ -10,7 +10,7 @@ class BmiView extends GetView<BmiController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('body_mass_index'),
+        title: Text('body_mass_index'.tr),
         centerTitle: true,
       ),
       body: const Center(

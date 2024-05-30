@@ -96,18 +96,18 @@ Profile _profileDeserialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  final object = Profile(
-    age: reader.readLongOrNull(offsets[0]),
-    gener: _ProfilegenerValueEnumMap[reader.readByteOrNull(offsets[1])] ??
-        Gender.male,
-    id: id,
-    image: reader.readString(offsets[2]),
-    locale: _ProfilelocaleValueEnumMap[reader.readByteOrNull(offsets[3])] ??
-        LocaleMode.enUS,
-    name: reader.readString(offsets[4]),
-    theme: _ProfilethemeValueEnumMap[reader.readByteOrNull(offsets[5])] ??
-        ThemeMode.dark,
-  );
+  final object = Profile();
+  object.age = reader.readLong(offsets[0]);
+  object.gener = _ProfilegenerValueEnumMap[reader.readByteOrNull(offsets[1])] ??
+      Gender.male;
+  object.id = id;
+  object.image = reader.readString(offsets[2]);
+  object.locale =
+      _ProfilelocaleValueEnumMap[reader.readByteOrNull(offsets[3])] ??
+          LocaleMode.enUS;
+  object.name = reader.readString(offsets[4]);
+  object.theme = _ProfilethemeValueEnumMap[reader.readByteOrNull(offsets[5])] ??
+      ThemeMode.dark;
   return object;
 }
 
@@ -119,7 +119,7 @@ P _profileDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
-      return (reader.readLongOrNull(offset)) as P;
+      return (reader.readLong(offset)) as P;
     case 1:
       return (_ProfilegenerValueEnumMap[reader.readByteOrNull(offset)] ??
           Gender.male) as P;
@@ -256,23 +256,7 @@ extension ProfileQueryWhere on QueryBuilder<Profile, Profile, QWhereClause> {
 
 extension ProfileQueryFilter
     on QueryBuilder<Profile, Profile, QFilterCondition> {
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> ageIsNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNull(
-        property: r'age',
-      ));
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> ageIsNotNull() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(const FilterCondition.isNotNull(
-        property: r'age',
-      ));
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> ageEqualTo(int? value) {
+  QueryBuilder<Profile, Profile, QAfterFilterCondition> ageEqualTo(int value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'age',
@@ -282,7 +266,7 @@ extension ProfileQueryFilter
   }
 
   QueryBuilder<Profile, Profile, QAfterFilterCondition> ageGreaterThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -295,7 +279,7 @@ extension ProfileQueryFilter
   }
 
   QueryBuilder<Profile, Profile, QAfterFilterCondition> ageLessThan(
-    int? value, {
+    int value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -308,8 +292,8 @@ extension ProfileQueryFilter
   }
 
   QueryBuilder<Profile, Profile, QAfterFilterCondition> ageBetween(
-    int? lower,
-    int? upper, {
+    int lower,
+    int upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -1012,7 +996,7 @@ extension ProfileQueryProperty
     });
   }
 
-  QueryBuilder<Profile, int?, QQueryOperations> ageProperty() {
+  QueryBuilder<Profile, int, QQueryOperations> ageProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'age');
     });

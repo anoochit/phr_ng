@@ -70,7 +70,7 @@ class BmiStatsView extends GetView<AppController> {
               ),
             )
           : NodataStatsView(
-              title: 'no_data_body_mass_index',
+              title: 'no_data_body_mass_index'.tr,
             ),
     );
   }

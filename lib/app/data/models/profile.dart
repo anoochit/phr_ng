@@ -6,24 +6,15 @@ part 'profile.g.dart';
 @collection
 class Profile {
   Id id = 1;
-  String name;
-  String image;
-  int? age;
+  late String name;
+  late String image;
+  late int age;
   @enumerated
   Gender gener = Gender.male;
   @enumerated
   ThemeMode theme = ThemeMode.dark;
   @enumerated
   LocaleMode locale = LocaleMode.enUS;
-  Profile({
-    required this.id,
-    required this.name,
-    required this.image,
-    this.age,
-    required this.gener,
-    required this.theme,
-    required this.locale,
-  });
 }
 
 enum ThemeMode {

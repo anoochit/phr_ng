@@ -66,7 +66,7 @@ class BloodpressureStatsView extends GetView<AppController> {
               ),
             )
           : NodataStatsView(
-              title: 'no_data_blood_pressure',
+              title: 'no_data_blood_pressure'.tr,
             ),
     );
   }

@@ -35,7 +35,7 @@ class MenuItemView extends GetView {
               // title
               Text(
                 title,
-                style: Theme.of(context).textTheme.labelMedium,
+                style: Theme.of(context).textTheme.bodyMedium,
               ),
             ],
           );

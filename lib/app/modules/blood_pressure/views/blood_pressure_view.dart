@@ -10,7 +10,7 @@ class BloodPressureView extends GetView<BloodPressureController> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: const Text('blood_pressure'),
+        title: Text('blood_pressure'.tr),
         centerTitle: true,
       ),
       body: const Center(

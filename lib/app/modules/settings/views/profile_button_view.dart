@@ -21,16 +21,16 @@ class ProfileButtonView extends GetView {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      width: 64 * 2,
-      height: 64 * 2,
+      width: (56 * 2) + 8,
+      height: (56 * 2),
       child: Stack(
         children: [
           CircleAvatar(
-            radius: 64.0,
+            radius: 56.0,
             child: (image == '')
                 ? const Icon(
                     Icons.person,
-                    size: 64.0,
+                    size: 56.0,
                   )
                 : Image.file(
                     File(image!),
@@ -39,6 +39,7 @@ class ProfileButtonView extends GetView {
             backgroundColor: backgroundColor,
           ),
           Positioned(
+            bottom: 0,
             right: 0,
             child: IconButton.filledTonal(
               onPressed: () {},

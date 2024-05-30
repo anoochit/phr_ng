@@ -61,7 +61,9 @@ class GlucoseStatsView extends GetView<AppController> {
                 ),
               ),
             )
-          : NodataStatsView(title: 'no_blood_glucose'),
+          : NodataStatsView(
+              title: 'no_data_blood_glucose'.tr,
+            ),
     );
   }
 }

@@ -8,17 +8,17 @@ class HomeController extends GetxController {
   List<MenuItem> menuItems = [
     MenuItem(
       icon: FontAwesomeIcons.weightScale,
-      title: 'body_mass_index',
+      title: 'body_mass_index'.tr,
       route: Routes.BMI,
     ),
     MenuItem(
       icon: FontAwesomeIcons.heartPulse,
-      title: 'blood_pressure',
+      title: 'blood_pressure'.tr,
       route: Routes.BLOOD_PRESSURE,
     ),
     MenuItem(
       icon: FontAwesomeIcons.candyCane,
-      title: 'blood_glucose',
+      title: 'blood_glucose'.tr,
       route: Routes.BLOOD_GLUCOSE,
     ),
   ];
