@@ -3,6 +3,8 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phr/app/routes/app_pages.dart';
 
+import '../../../widgets/views/history_button_view.dart';
+import '../../../widgets/views/stats_card_box_view.dart';
 import '../controllers/blood_glucose_controller.dart';
 
 class BloodGlucoseView extends GetView<BloodGlucoseController> {
@@ -23,11 +25,31 @@ class BloodGlucoseView extends GetView<BloodGlucoseController> {
           )
         ],
       ),
-      body: const Center(
-        child: Text(
-          'BloodGlucoseView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: ListView(
+        children: [
+          // stats
+          GridView.builder(
+            itemCount: 2,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+              crossAxisCount: 2,
+              childAspectRatio: 3 / 2,
+            ),
+            itemBuilder: (context, index) {
+              return StatsCardBoxView(
+                title: 'title',
+                value: 'value',
+                unit: 'unit',
+              );
+            },
+          ),
+
+          // graphs
+
+          // history button
+          HistoryButtonView(onTap: () {}),
+        ],
       ),
     );
   }

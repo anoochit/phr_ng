@@ -4,8 +4,8 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 
-class ProfileButtonView extends GetView {
-  const ProfileButtonView({
+class ProfileAvatarButtonView extends GetView {
+  const ProfileAvatarButtonView({
     super.key,
     this.image,
     required this.backgroundColor,
@@ -15,7 +15,7 @@ class ProfileButtonView extends GetView {
 
   final String title;
   final String? image;
-  final MaterialColor backgroundColor;
+  final Color backgroundColor;
   final VoidCallback onTap;
 
   @override

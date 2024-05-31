@@ -3,9 +3,9 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:phr/app/routes/app_pages.dart';
 import '../controllers/home_controller.dart';
-import 'bloodpressure_stats_view.dart';
-import 'bmi_stats_view.dart';
-import 'glucose_stats_view.dart';
+import '../../../widgets/views/bloodpressure_stats_view.dart';
+import '../../../widgets/views/bmi_stats_view.dart';
+import '../../../widgets/views/glucose_stats_view.dart';
 import 'menu_view.dart';
 
 class HomeView extends GetView<HomeController> {

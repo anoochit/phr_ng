@@ -3,25 +3,25 @@ import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 
-import '../../../controllers/app_controller.dart';
-import '../../../widgets/views/stats_box_view.dart';
-import '../../../widgets/views/nodata_stats_view.dart';
+import '../../controllers/app_controller.dart';
+import 'stats_box_view.dart';
+import 'nodata_stats_view.dart';
 
 class GlucoseStatsView extends GetView<AppController> {
-  const GlucoseStatsView({super.key, required this.onTap});
+  const GlucoseStatsView({super.key, this.onTap});
 
-  final VoidCallback onTap;
+  final VoidCallback? onTap;
 
   @override
   Widget build(BuildContext context) {
     final listGlucose = controller.listGlucose;
 
     return Obx(
-      () => (listGlucose.isNotEmpty)
+      () => (!listGlucose.isNotEmpty)
           ? Card(
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: InkWell(
-                onTap: () => onTap(),
+                onTap: (onTap != null) ? () => onTap!() : null,
                 child: Container(
                   width: MediaQuery.sizeOf(context).width,
                   padding: EdgeInsets.all(16.0),
@@ -30,29 +30,27 @@ class GlucoseStatsView extends GetView<AppController> {
                     children: [
                       // title
                       Text(
-                        "blood_glucose",
+                        "blood_glucose".tr,
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
 
                       Gap(16.0),
 
                       // stats
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                        children: [
-                          // glucose
-                          StatsBoxView(
-                            title: 'glucose',
-                            value: '0.0',
-                            unit: 'mg/dL',
-                          ),
-                          // a1c
-                          StatsBoxView(
-                            title: 'a1c',
-                            value: '0.0',
-                            unit: '%',
-                          ),
-                        ],
+                      GridView.builder(
+                        itemCount: 2,
+                        shrinkWrap: true,
+                        physics: NeverScrollableScrollPhysics(),
+                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                          crossAxisCount: 2,
+                        ),
+                        itemBuilder: (context, index) {
+                          return StatsBoxView(
+                            title: 'title',
+                            value: 'value',
+                            unit: 'unit',
+                          );
+                        },
                       ),
 
                       // graph

@@ -23,6 +23,8 @@ class AppController extends GetxController {
   onInit() async {
     super.onInit();
 
+    log('app init');
+
     // init db
     _db = await _dbService.init();
 

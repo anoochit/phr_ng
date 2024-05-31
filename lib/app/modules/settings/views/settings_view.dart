@@ -4,7 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/app_controller.dart';
-import 'profile_button_view.dart';
+import '../../../widgets/views/profile_button_view.dart';
 
 class SettingsView extends GetView {
   const SettingsView({super.key});
@@ -28,10 +28,11 @@ class SettingsView extends GetView {
                 Gap(16.0),
 
                 // avatar
-                ProfileButtonView(
+                ProfileAvatarButtonView(
                   title: name,
                   image: image,
-                  backgroundColor: Colors.grey,
+                  backgroundColor:
+                      Theme.of(context).colorScheme.onInverseSurface,
                   onTap: () {
                     // TODO : Change avatar image
                   },

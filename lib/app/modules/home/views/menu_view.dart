@@ -14,7 +14,7 @@ class MenuView extends GetView<HomeController> {
     return GridView.count(
       shrinkWrap: true,
       crossAxisCount: 3,
-      physics: NeverScrollableScrollPhysics(),
+      physics: const NeverScrollableScrollPhysics(),
       children: List.generate(
         menus.length,
         (index) {

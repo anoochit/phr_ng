@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:phr/app/widgets/views/history_button_view.dart';
+import 'package:phr/app/widgets/views/stats_card_box_view.dart';
 
 import '../../../routes/app_pages.dart';
 import '../controllers/bmi_controller.dart';
@@ -23,11 +25,29 @@ class BmiView extends GetView<BmiController> {
           )
         ],
       ),
-      body: const Center(
-        child: Text(
-          'BmiView is working',
-          style: TextStyle(fontSize: 20),
-        ),
+      body: ListView(
+        children: [
+          // stats
+          GridView.builder(
+            itemCount: 3,
+            shrinkWrap: true,
+            physics: NeverScrollableScrollPhysics(),
+            gridDelegate:
+                SliverGridDelegateWithFixedCrossAxisCount(crossAxisCount: 3),
+            itemBuilder: (context, index) {
+              return StatsCardBoxView(
+                title: 'title',
+                value: 'value',
+                unit: 'unit',
+              );
+            },
+          ),
+
+          // graphs
+
+          // history button
+          HistoryButtonView(onTap: () {}),
+        ],
       ),
     );
   }
