@@ -18,14 +18,16 @@ class SettingsView extends GetView {
       body: GetBuilder<AppController>(
         builder: (controller) {
           final profile = controller.profile;
-          final image = profile.image;
-          final name = profile.name;
-          final theme = profile.theme;
-          final locale = profile.locale;
+          String image = profile.image;
+          String name = profile.name;
+          String theme = controller.getThemeTitle(profile.theme);
+          String locale = controller.getLocaleTitle(profile.locale);
+          String gender = controller.getGenderTitle(profile.gender);
+          String age = '${profile.age}';
           return SingleChildScrollView(
             child: Column(
               children: [
-                Gap(16.0),
+                const Gap(16.0),
 
                 // avatar
                 ProfileAvatarButtonView(
@@ -38,7 +40,7 @@ class SettingsView extends GetView {
                   },
                 ),
 
-                Gap(8.0),
+                const Gap(8.0),
 
                 // name
                 Center(
@@ -48,51 +50,71 @@ class SettingsView extends GetView {
                   ),
                 ),
 
-                Gap(16.0),
+                const Gap(16.0),
 
                 // change display name
                 ListTile(
-                  leading: Icon(Icons.account_circle),
+                  leading: const Icon(Icons.account_circle),
                   title: Text('name'.tr),
                   onTap: () {
                     //  TODO : setting display name
                   },
+                  trailing: Text(
+                    name,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
 
                 // change gender
                 ListTile(
-                  leading: Icon(Icons.person),
+                  leading: const Icon(Icons.person),
                   title: Text('gender'.tr),
                   onTap: () {
                     // TODO : setting gener
                   },
+                  trailing: Text(
+                    gender,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
 
                 // change age
                 ListTile(
-                  leading: Icon(Icons.person_add),
+                  leading: const Icon(Icons.person_add),
                   title: Text('age'.tr),
                   onTap: () {
                     // TODO : setting age
                   },
+                  trailing: Text(
+                    age,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
 
                 // change theme
                 ListTile(
-                  leading: Icon(Icons.contrast),
+                  leading: const Icon(Icons.contrast),
                   title: Text('theme'.tr),
                   onTap: () {
                     // TODO : setting theme
                   },
+                  trailing: Text(
+                    theme.tr,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
 
                 // change locale
                 ListTile(
-                  leading: Icon(Icons.language),
+                  leading: const Icon(Icons.language),
                   title: Text('locale'.tr),
                   onTap: () {
                     // TODO :setting locale
                   },
+                  trailing: Text(
+                    locale.tr,
+                    style: Theme.of(context).textTheme.bodyMedium,
+                  ),
                 ),
               ],
             ),

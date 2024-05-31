@@ -22,11 +22,11 @@ const ProfileSchema = CollectionSchema(
       name: r'age',
       type: IsarType.long,
     ),
-    r'gener': PropertySchema(
+    r'gender': PropertySchema(
       id: 1,
-      name: r'gener',
+      name: r'gender',
       type: IsarType.byte,
-      enumMap: _ProfilegenerEnumValueMap,
+      enumMap: _ProfilegenderEnumValueMap,
     ),
     r'image': PropertySchema(
       id: 2,
@@ -83,7 +83,7 @@ void _profileSerialize(
   Map<Type, List<int>> allOffsets,
 ) {
   writer.writeLong(offsets[0], object.age);
-  writer.writeByte(offsets[1], object.gener.index);
+  writer.writeByte(offsets[1], object.gender.index);
   writer.writeString(offsets[2], object.image);
   writer.writeByte(offsets[3], object.locale.index);
   writer.writeString(offsets[4], object.name);
@@ -98,8 +98,9 @@ Profile _profileDeserialize(
 ) {
   final object = Profile();
   object.age = reader.readLong(offsets[0]);
-  object.gener = _ProfilegenerValueEnumMap[reader.readByteOrNull(offsets[1])] ??
-      Gender.male;
+  object.gender =
+      _ProfilegenderValueEnumMap[reader.readByteOrNull(offsets[1])] ??
+          Gender.male;
   object.id = id;
   object.image = reader.readString(offsets[2]);
   object.locale =
@@ -121,7 +122,7 @@ P _profileDeserializeProp<P>(
     case 0:
       return (reader.readLong(offset)) as P;
     case 1:
-      return (_ProfilegenerValueEnumMap[reader.readByteOrNull(offset)] ??
+      return (_ProfilegenderValueEnumMap[reader.readByteOrNull(offset)] ??
           Gender.male) as P;
     case 2:
       return (reader.readString(offset)) as P;
@@ -138,12 +139,12 @@ P _profileDeserializeProp<P>(
   }
 }
 
-const _ProfilegenerEnumValueMap = {
+const _ProfilegenderEnumValueMap = {
   'male': 0,
   'female': 1,
   'other': 2,
 };
-const _ProfilegenerValueEnumMap = {
+const _ProfilegenderValueEnumMap = {
   0: Gender.male,
   1: Gender.female,
   2: Gender.other,
@@ -308,43 +309,43 @@ extension ProfileQueryFilter
     });
   }
 
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> generEqualTo(
+  QueryBuilder<Profile, Profile, QAfterFilterCondition> genderEqualTo(
       Gender value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'gener',
+        property: r'gender',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> generGreaterThan(
+  QueryBuilder<Profile, Profile, QAfterFilterCondition> genderGreaterThan(
     Gender value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'gener',
+        property: r'gender',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> generLessThan(
+  QueryBuilder<Profile, Profile, QAfterFilterCondition> genderLessThan(
     Gender value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'gener',
+        property: r'gender',
         value: value,
       ));
     });
   }
 
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> generBetween(
+  QueryBuilder<Profile, Profile, QAfterFilterCondition> genderBetween(
     Gender lower,
     Gender upper, {
     bool includeLower = true,
@@ -352,7 +353,7 @@ extension ProfileQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'gener',
+        property: r'gender',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -799,15 +800,15 @@ extension ProfileQuerySortBy on QueryBuilder<Profile, Profile, QSortBy> {
     });
   }
 
-  QueryBuilder<Profile, Profile, QAfterSortBy> sortByGener() {
+  QueryBuilder<Profile, Profile, QAfterSortBy> sortByGender() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'gener', Sort.asc);
+      return query.addSortBy(r'gender', Sort.asc);
     });
   }
 
-  QueryBuilder<Profile, Profile, QAfterSortBy> sortByGenerDesc() {
+  QueryBuilder<Profile, Profile, QAfterSortBy> sortByGenderDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'gener', Sort.desc);
+      return query.addSortBy(r'gender', Sort.desc);
     });
   }
 
@@ -874,15 +875,15 @@ extension ProfileQuerySortThenBy
     });
   }
 
-  QueryBuilder<Profile, Profile, QAfterSortBy> thenByGener() {
+  QueryBuilder<Profile, Profile, QAfterSortBy> thenByGender() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'gener', Sort.asc);
+      return query.addSortBy(r'gender', Sort.asc);
     });
   }
 
-  QueryBuilder<Profile, Profile, QAfterSortBy> thenByGenerDesc() {
+  QueryBuilder<Profile, Profile, QAfterSortBy> thenByGenderDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'gener', Sort.desc);
+      return query.addSortBy(r'gender', Sort.desc);
     });
   }
 
@@ -955,9 +956,9 @@ extension ProfileQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Profile, Profile, QDistinct> distinctByGener() {
+  QueryBuilder<Profile, Profile, QDistinct> distinctByGender() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'gener');
+      return query.addDistinctBy(r'gender');
     });
   }
 
@@ -1002,9 +1003,9 @@ extension ProfileQueryProperty
     });
   }
 
-  QueryBuilder<Profile, Gender, QQueryOperations> generProperty() {
+  QueryBuilder<Profile, Gender, QQueryOperations> genderProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'gener');
+      return query.addPropertyName(r'gender');
     });
   }
 

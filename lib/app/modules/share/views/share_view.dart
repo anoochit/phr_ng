@@ -2,15 +2,12 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
-import 'package:phr/app/controllers/app_controller.dart';
-import 'package:phr/app/modules/blood_glucose/views/blood_glucose_view.dart';
-import 'package:phr/app/widgets/views/bloodpressure_stats_view.dart';
-import 'package:phr/app/widgets/views/bmi_stats_view.dart';
 
+import '../../../controllers/app_controller.dart';
+import '../../../widgets/views/bloodpressure_stats_view.dart';
+import '../../../widgets/views/bmi_stats_view.dart';
 import '../../../widgets/views/glucose_stats_view.dart';
 import '../../../widgets/views/profile_avatar_view.dart';
-import '../../../widgets/views/profile_button_view.dart';
-import '../controllers/share_controller.dart';
 
 class ShareView extends GetView {
   const ShareView({super.key});
@@ -31,6 +28,8 @@ class ShareView extends GetView {
           return SingleChildScrollView(
             child: Column(
               children: [
+                const Gap(8.0),
+
                 // avatar
                 ProfileAvatarView(
                   title: name,
@@ -39,7 +38,7 @@ class ShareView extends GetView {
                       Theme.of(context).colorScheme.onInverseSurface,
                 ),
 
-                Gap(8.0),
+                const Gap(8.0),
 
                 // name
                 Center(
@@ -49,14 +48,22 @@ class ShareView extends GetView {
                   ),
                 ),
 
+                const Gap(8.0),
+
                 // bmi stats
-                BmiStatsView(),
+                const BmiStatsView(),
+
+                const Gap(8.0),
 
                 // blood pressure stats
-                BloodpressureStatsView(),
+                const BloodpressureStatsView(),
+
+                const Gap(8.0),
 
                 // blood glucose stats
-                GlucoseStatsView()
+                const GlucoseStatsView(),
+
+                const Gap(8.0),
               ],
             ),
           );

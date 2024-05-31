@@ -6,7 +6,7 @@ class GraphBoxView extends GetView {
   const GraphBoxView({super.key});
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return const Center(
       child: Text(
         'GraphBoxView is working',
         style: TextStyle(fontSize: 20),

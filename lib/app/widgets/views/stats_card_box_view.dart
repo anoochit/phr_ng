@@ -27,15 +27,18 @@ class StatsCardBoxView extends GetView {
           ),
 
           // value
-          Text(
-            value,
-            style: Theme.of(context).textTheme.headlineMedium,
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              value,
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
           ),
 
           // unit
           Text(
             unit,
-            style: Theme.of(context).textTheme.labelSmall,
+            style: Theme.of(context).textTheme.labelMedium,
           ),
         ],
       ),

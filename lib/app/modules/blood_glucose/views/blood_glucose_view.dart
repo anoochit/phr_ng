@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:phr/app/routes/app_pages.dart';
 
+import '../../../controllers/app_controller.dart';
+import '../../../routes/app_pages.dart';
 import '../../../widgets/views/history_button_view.dart';
 import '../../../widgets/views/stats_card_box_view.dart';
-import '../controllers/blood_glucose_controller.dart';
 
-class BloodGlucoseView extends GetView<BloodGlucoseController> {
+class BloodGlucoseView extends GetView {
   const BloodGlucoseView({super.key});
   @override
   Widget build(BuildContext context) {
@@ -18,38 +18,44 @@ class BloodGlucoseView extends GetView<BloodGlucoseController> {
         actions: [
           IconButton(
             onPressed: () => Get.toNamed(Routes.ADD_BLOOD_GLUCOSE),
-            icon: Icon(
+            icon: const Icon(
               Icons.add,
               size: 28,
             ),
           )
         ],
       ),
-      body: ListView(
-        children: [
-          // stats
-          GridView.builder(
-            itemCount: 2,
-            shrinkWrap: true,
-            physics: NeverScrollableScrollPhysics(),
-            gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisCount: 2,
-              childAspectRatio: 3 / 2,
-            ),
-            itemBuilder: (context, index) {
-              return StatsCardBoxView(
-                title: 'title',
-                value: 'value',
-                unit: 'unit',
-              );
-            },
-          ),
+      body: GetBuilder<AppController>(
+        builder: (controller) {
+          return ListView(
+            children: [
+              // stats
+              GridView.builder(
+                itemCount: 2,
+                shrinkWrap: true,
+                physics: const NeverScrollableScrollPhysics(),
+                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                  crossAxisCount: 2,
+                  childAspectRatio: 3 / 2,
+                ),
+                itemBuilder: (context, index) {
+                  // TODO : add value
+                  final label = controller.listGlucoseLabel;
+                  return StatsCardBoxView(
+                    title: label[index].title.tr,
+                    value: 'value',
+                    unit: label[index].unit.tr,
+                  );
+                },
+              ),
 
-          // graphs
+              // graphs
 
-          // history button
-          HistoryButtonView(onTap: () {}),
-        ],
+              // history button
+              HistoryButtonView(onTap: () {}),
+            ],
+          );
+        },
       ),
     );
   }

@@ -25,6 +25,30 @@ class LocaleKeys {
   static const age = 'age';
   static const theme = 'theme';
   static const locale = 'locale';
+  static const weight = 'weight';
+  static const height = 'height';
+  static const bmi = 'bmi';
+  static const sys = 'sys';
+  static const dia = 'dia';
+  static const pul = 'pul';
+  static const glucose = 'glucose';
+  static const a1c = 'a1c';
+  static const kg = 'kg';
+  static const cm = 'cm';
+  static const kgm2 = 'kgm2';
+  static const mmhg = 'mmhg';
+  static const bpm = 'bpm';
+  static const mgdl = 'mgdl';
+  static const percent = 'percent';
+  static const history = 'history';
+  static const english = 'english';
+  static const thai = 'thai';
+  static const male = 'male';
+  static const female = 'female';
+  static const other = 'other';
+  static const dark = 'dark';
+  static const light = 'light';
+  static const system = 'system';
 }
 
 class Locales {
@@ -43,6 +67,30 @@ class Locales {
     'age': 'Age',
     'theme': 'Theme',
     'locale': 'Language',
+    'weight': 'Weight',
+    'height': 'Height',
+    'bmi': 'BMI',
+    'sys': 'SYS',
+    'dia': 'DIA',
+    'pul': 'PUL',
+    'glucose': 'Glucose',
+    'a1c': 'A1C',
+    'kg': 'kg.',
+    'cm': 'cm.',
+    'kgm2': 'kg./m^2',
+    'mmhg': 'mm Hg',
+    'bpm': 'bpm',
+    'mgdl': 'mg/dL',
+    'percent': '%',
+    'history': 'History',
+    'english': 'English',
+    'thai': 'Thai',
+    'male': 'Male',
+    'female': 'Female',
+    'other': 'Other',
+    'dark': 'Dark',
+    'light': 'Light',
+    'system': 'System',
   };
   static const th_TH = {
     'home': 'หน้าแรก',
@@ -59,5 +107,29 @@ class Locales {
     'age': 'อายุ',
     'theme': 'ธีม',
     'locale': 'ภาษา',
+    'weight': 'น้ำหนัก',
+    'height': 'ส่วนสูง',
+    'bmi': 'BMI',
+    'sys': 'SYS',
+    'dia': 'DIA',
+    'pul': 'PUL',
+    'glucose': 'Glucose',
+    'a1c': 'A1C',
+    'kg': 'kg.',
+    'cm': 'cm.',
+    'kgm2': 'kg./m^2',
+    'mmhg': 'mm Hg',
+    'bpm': 'bpm',
+    'mgdl': 'mg/dL',
+    'percent': '%',
+    'history': 'ข้อมูลย้อนหลัง',
+    'english': 'ภาษาอังกฤษ',
+    'thai': 'ภาษาไทย',
+    'male': 'ชาย',
+    'female': 'หญิง',
+    'other': 'อื่นๆ',
+    'dark': 'โหมดมืด',
+    'light': 'โหมดสว่าง',
+    'system': 'ค่าระบบ',
   };
 }

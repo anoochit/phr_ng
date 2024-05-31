@@ -2,6 +2,7 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
+import 'package:phr/app/data/models/stats_label.dart';
 
 import '../data/models/bmi.dart';
 import '../data/models/glucose.dart';
@@ -13,6 +14,24 @@ class AppController extends GetxController {
   RxList<Bmi> listBMI = <Bmi>[].obs;
   RxList<Glucose> listGlucose = <Glucose>[].obs;
   RxList<BloodPressure> listBloodPressure = <BloodPressure>[].obs;
+
+  List<StatsLabel> listBMILabel = <StatsLabel>[
+    StatsLabel(title: 'weight', unit: 'kg'),
+    StatsLabel(title: 'height', unit: 'cm'),
+    StatsLabel(title: 'bmi', unit: 'kgm2'),
+  ];
+
+  List<StatsLabel> listBloodPressureLabel = <StatsLabel>[
+    StatsLabel(title: 'sys', unit: 'mmhg'),
+    StatsLabel(title: 'dia', unit: 'mmhg'),
+    StatsLabel(title: 'pul', unit: 'bpm'),
+  ];
+
+  List<StatsLabel> listGlucoseLabel = <StatsLabel>[
+    StatsLabel(title: 'glucose', unit: 'mgdl'),
+    StatsLabel(title: 'a1c', unit: 'percent'),
+  ];
+
   late Profile profile;
 
   final DatabaseService _dbService = Get.put(DatabaseService());
@@ -67,7 +86,7 @@ class AppController extends GetxController {
       if (value == null) {
         final data = Profile()
           ..name = 'John Doe'
-          ..gener = Gender.male
+          ..gender = Gender.male
           ..age = 25
           ..image = ''
           ..id = 1
@@ -83,5 +102,47 @@ class AppController extends GetxController {
       }
       update();
     });
+  }
+
+  String getThemeTitle(ThemeMode theme) {
+    switch (theme.name) {
+      case 'dark':
+        return 'dark';
+
+      case 'light':
+        return 'light';
+
+      case 'system':
+        return 'system';
+
+      default:
+        return 'dark';
+    }
+  }
+
+  getLocaleTitle(LocaleMode locale) {
+    switch (locale.name) {
+      case 'enUS':
+        return 'english';
+
+      case 'thTH':
+        return 'thai';
+
+      default:
+        return 'english';
+    }
+  }
+
+  getGenderTitle(Gender gender) {
+    switch (gender.name) {
+      case 'male':
+        return 'male';
+
+      case 'female':
+        return 'female';
+
+      default:
+        return 'other';
+    }
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
 
@@ -22,7 +21,7 @@ class BloodpressureStatsView extends GetView<AppController> {
                 onTap: (onTap != null) ? () => onTap!() : null,
                 child: Container(
                   width: MediaQuery.sizeOf(context).width,
-                  padding: EdgeInsets.all(16.0),
+                  padding: const EdgeInsets.all(16.0),
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
@@ -32,26 +31,27 @@ class BloodpressureStatsView extends GetView<AppController> {
                         style: Theme.of(context).textTheme.labelLarge,
                       ),
 
-                      Gap(16.0),
-
                       // stats
                       GridView.builder(
                         itemCount: 3,
                         shrinkWrap: true,
-                        physics: NeverScrollableScrollPhysics(),
-                        gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
+                        physics: const NeverScrollableScrollPhysics(),
+                        gridDelegate:
+                            const SliverGridDelegateWithFixedCrossAxisCount(
                           crossAxisCount: 3,
                         ),
                         itemBuilder: (context, index) {
+                          // TODO : insert value
+                          final label = controller.listBloodPressureLabel;
                           return StatsBoxView(
-                            title: 'title',
+                            title: label[index].title.tr,
                             value: 'value',
-                            unit: 'unit',
+                            unit: label[index].unit.tr,
                           );
                         },
                       ),
 
-                      // graph
+                      // TODO : graph
                     ],
                   ),
                 ),

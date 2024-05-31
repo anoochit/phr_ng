@@ -27,6 +27,7 @@ class ProfileAvatarButtonView extends GetView {
         children: [
           CircleAvatar(
             radius: 56.0,
+            backgroundColor: backgroundColor,
             child: (image == '')
                 ? const Icon(
                     Icons.person,
@@ -36,7 +37,6 @@ class ProfileAvatarButtonView extends GetView {
                     File(image!),
                     fit: BoxFit.cover,
                   ),
-            backgroundColor: backgroundColor,
           ),
           Positioned(
             bottom: 0,

@@ -10,7 +10,7 @@ class Profile {
   late String image;
   late int age;
   @enumerated
-  Gender gener = Gender.male;
+  Gender gender = Gender.male;
   @enumerated
   ThemeMode theme = ThemeMode.dark;
   @enumerated

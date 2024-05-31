@@ -20,6 +20,7 @@ class ProfileAvatarView extends GetView {
   Widget build(BuildContext context) {
     return CircleAvatar(
       radius: 48.0,
+      backgroundColor: backgroundColor,
       child: (image == '')
           ? const Icon(
               Icons.person,
@@ -29,7 +30,6 @@ class ProfileAvatarView extends GetView {
               File(image!),
               fit: BoxFit.cover,
             ),
-      backgroundColor: backgroundColor,
     );
   }
 }

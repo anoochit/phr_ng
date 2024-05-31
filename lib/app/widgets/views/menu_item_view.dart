@@ -30,7 +30,7 @@ class MenuItemView extends GetView {
                 size: constraints.maxWidth * 0.4,
               ),
 
-              Gap(8.0),
+              const Gap(8.0),
 
               // title
               Text(
