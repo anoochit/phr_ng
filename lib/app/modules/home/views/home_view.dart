@@ -56,7 +56,8 @@ class HomeView extends GetView<HomeController> {
           PopupMenuItem(
             child: Text('share'.tr),
             onTap: () {
-              // TODO : share
+              // open share
+              Get.toNamed(Routes.SHARE);
             },
           )
         ],

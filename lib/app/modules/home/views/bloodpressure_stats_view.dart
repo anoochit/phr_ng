@@ -2,10 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../../controllers/app_controller.dart';
 import '../../../widgets/views/stats_box_view.dart';
-import 'nodata_stats_view.dart';
+import '../../../widgets/views/nodata_stats_view.dart';
 
 class BloodpressureStatsView extends GetView<AppController> {
   const BloodpressureStatsView({super.key, required this.onTap});

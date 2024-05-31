@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 
 import '../../../controllers/app_controller.dart';
 import '../../../widgets/views/stats_box_view.dart';
-import 'nodata_stats_view.dart';
+import '../../../widgets/views/nodata_stats_view.dart';
 
 class GlucoseStatsView extends GetView<AppController> {
   const GlucoseStatsView({super.key, required this.onTap});

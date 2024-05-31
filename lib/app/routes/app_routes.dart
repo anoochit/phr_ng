@@ -10,6 +10,10 @@ abstract class Routes {
   static const BLOOD_PRESSURE = _Paths.BLOOD_PRESSURE;
   static const BLOOD_GLUCOSE = _Paths.BLOOD_GLUCOSE;
   static const SETTINGS = _Paths.SETTINGS;
+  static const ADD_BMI = _Paths.ADD_BMI;
+  static const ADD_BLOOD_PRESSURE = _Paths.ADD_BLOOD_PRESSURE;
+  static const ADD_BLOOD_GLUCOSE = _Paths.ADD_BLOOD_GLUCOSE;
+  static const SHARE = _Paths.SHARE;
 }
 
 abstract class _Paths {
@@ -19,4 +23,8 @@ abstract class _Paths {
   static const BLOOD_PRESSURE = '/blood-pressure';
   static const BLOOD_GLUCOSE = '/blood-glucose';
   static const SETTINGS = '/settings';
+  static const ADD_BMI = '/add-bmi';
+  static const ADD_BLOOD_PRESSURE = '/add-blood-pressure';
+  static const ADD_BLOOD_GLUCOSE = '/add-blood-glucose';
+  static const SHARE = '/share';
 }
