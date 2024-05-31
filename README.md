@@ -8,6 +8,6 @@
 
 # Personal Health Record
 
-A new generation for personal health record, written in Flutter, Hive and enhanced feature with Gen AI.
+A new generation for personal health record, written in Flutter, Isar and enhanced feature with Gen AI.
 
 A self fork project from [Flutter PHR](https://github.com/anoochit/flutter_phr/tree/master)
