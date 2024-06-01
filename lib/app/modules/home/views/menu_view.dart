@@ -11,23 +11,22 @@ class MenuView extends GetView<HomeController> {
   @override
   Widget build(BuildContext context) {
     final menus = controller.menuItems;
-    return GridView.count(
+    return GridView.builder(
       shrinkWrap: true,
-      crossAxisCount: 3,
-      physics: const NeverScrollableScrollPhysics(),
-      children: List.generate(
-        menus.length,
-        (index) {
-          final title = menus[index].title;
-          final icon = menus[index].icon;
-          final route = menus[index].route;
-          return MenuItemView(
-            title: title,
-            icon: icon,
-            onTap: () => Get.toNamed(route),
-          );
-        },
+      gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+        crossAxisCount: 3,
       ),
+      itemCount: menus.length,
+      itemBuilder: (BuildContext context, int index) {
+        final title = menus[index].title;
+        final icon = menus[index].icon;
+        final route = menus[index].route;
+        return MenuItemView(
+          title: title.tr,
+          icon: icon,
+          onTap: () => Get.toNamed(route),
+        );
+      },
     );
   }
 }

@@ -21,7 +21,7 @@ class HomeView extends GetView<HomeController> {
       body: ListView(
         children: [
           // menu
-          const MenuView(),
+          MenuView(),
 
           // bmi stats with graph
           BmiStatsView(
