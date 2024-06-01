@@ -18,10 +18,11 @@ class SettingsView extends GetView {
       body: GetBuilder<AppController>(
         builder: (controller) {
           final profile = controller.profile;
+          final setting = controller.setting;
           String image = profile.image;
           String name = profile.name;
-          String theme = controller.getThemeTitle(profile.theme);
-          String locale = controller.getLocaleTitle(profile.locale);
+          String theme = controller.getThemeTitle(setting.theme);
+          String locale = controller.getLocaleTitle(setting.locale);
           String gender = controller.getGenderTitle(profile.gender);
           String age = '${profile.age}';
           return SingleChildScrollView(

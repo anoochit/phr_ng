@@ -23,8 +23,6 @@ class ShareView extends GetView {
           final profile = controller.profile;
           final image = profile.image;
           final name = profile.name;
-          final theme = profile.theme;
-          final locale = profile.locale;
           return SingleChildScrollView(
             child: Column(
               children: [

@@ -2,13 +2,14 @@ import 'dart:developer';
 
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:phr/app/data/models/setting.dart';
 import 'package:phr/app/data/models/stats_label.dart';
 
 import '../data/models/bmi.dart';
 import '../data/models/glucose.dart';
 import '../data/models/pressure.dart';
 import '../data/models/profile.dart';
-import '../data/services/database.dart';
 
 class AppController extends GetxController {
   RxList<Bmi> listBMI = <Bmi>[].obs;
@@ -33,8 +34,7 @@ class AppController extends GetxController {
   ];
 
   late Profile profile;
-
-  final DatabaseService _dbService = Get.put(DatabaseService());
+  late Setting setting;
 
   late Isar _db;
 
@@ -45,7 +45,7 @@ class AppController extends GetxController {
     log('app init');
 
     // init db
-    _db = await _dbService.init();
+    _db = await initializedDatabase();
 
     // load data
     loadProfileData();
@@ -54,11 +54,26 @@ class AppController extends GetxController {
     loadGlucoseData();
   }
 
+  Future<Isar> initializedDatabase() async {
+    final dir = await getApplicationDocumentsDirectory();
+    return await Isar.open(
+      [
+        BmiSchema,
+        GlucoseSchema,
+        BloodPressureSchema,
+        ProfileSchema,
+        SettingSchema,
+      ],
+      directory: dir.path,
+    );
+  }
+
   // load bmi data
   loadBMIData() {
     _db.bmis.where().findAll().then((value) {
       log('load bmi data');
       listBMI.value = value;
+      update();
     });
   }
 
@@ -67,6 +82,7 @@ class AppController extends GetxController {
     _db.glucoses.where().findAll().then((value) {
       log('load glucose data');
       listGlucose.value = value;
+      update();
     });
   }
 
@@ -75,6 +91,7 @@ class AppController extends GetxController {
     _db.bloodPressures.where().findAll().then((value) {
       log('load blood presure data');
       listBloodPressure.value = value;
+      update();
     });
   }
 
@@ -89,9 +106,7 @@ class AppController extends GetxController {
           ..gender = Gender.male
           ..age = 25
           ..image = ''
-          ..id = 1
-          ..theme = ThemeMode.dark
-          ..locale = LocaleMode.enUS;
+          ..id = 1;
         // write default value
         await _db.writeTxn(() async {
           await _db.profiles.put(data);
@@ -100,8 +115,26 @@ class AppController extends GetxController {
       } else {
         profile = value;
       }
-      update();
     });
+
+    _db.settings.get(1).then((value) async {
+      log('load profile data');
+      // no profile data, create a template once
+      if (value == null) {
+        final data = Setting()
+          ..theme = ThemeMode.dark
+          ..locale = LocaleMode.enUS;
+        // write default value
+        await _db.writeTxn(() async {
+          await _db.settings.put(data);
+        });
+        setting = data;
+      } else {
+        setting = value;
+      }
+    });
+
+    update();
   }
 
   String getThemeTitle(ThemeMode theme) {

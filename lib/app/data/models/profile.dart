@@ -1,4 +1,3 @@
-// ignore_for_file: public_member_api_docs, sort_constructors_first
 import 'package:isar/isar.dart';
 
 part 'profile.g.dart';
@@ -11,25 +10,10 @@ class Profile {
   late int age;
   @enumerated
   Gender gender = Gender.male;
-  @enumerated
-  ThemeMode theme = ThemeMode.dark;
-  @enumerated
-  LocaleMode locale = LocaleMode.enUS;
-}
-
-enum ThemeMode {
-  dark,
-  light,
-  system,
 }
 
 enum Gender {
   male,
   female,
   other,
-}
-
-enum LocaleMode {
-  enUS,
-  thTH,
 }

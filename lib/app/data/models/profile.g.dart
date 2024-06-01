@@ -33,22 +33,10 @@ const ProfileSchema = CollectionSchema(
       name: r'image',
       type: IsarType.string,
     ),
-    r'locale': PropertySchema(
-      id: 3,
-      name: r'locale',
-      type: IsarType.byte,
-      enumMap: _ProfilelocaleEnumValueMap,
-    ),
     r'name': PropertySchema(
-      id: 4,
+      id: 3,
       name: r'name',
       type: IsarType.string,
-    ),
-    r'theme': PropertySchema(
-      id: 5,
-      name: r'theme',
-      type: IsarType.byte,
-      enumMap: _ProfilethemeEnumValueMap,
     )
   },
   estimateSize: _profileEstimateSize,
@@ -85,9 +73,7 @@ void _profileSerialize(
   writer.writeLong(offsets[0], object.age);
   writer.writeByte(offsets[1], object.gender.index);
   writer.writeString(offsets[2], object.image);
-  writer.writeByte(offsets[3], object.locale.index);
-  writer.writeString(offsets[4], object.name);
-  writer.writeByte(offsets[5], object.theme.index);
+  writer.writeString(offsets[3], object.name);
 }
 
 Profile _profileDeserialize(
@@ -103,12 +89,7 @@ Profile _profileDeserialize(
           Gender.male;
   object.id = id;
   object.image = reader.readString(offsets[2]);
-  object.locale =
-      _ProfilelocaleValueEnumMap[reader.readByteOrNull(offsets[3])] ??
-          LocaleMode.enUS;
-  object.name = reader.readString(offsets[4]);
-  object.theme = _ProfilethemeValueEnumMap[reader.readByteOrNull(offsets[5])] ??
-      ThemeMode.dark;
+  object.name = reader.readString(offsets[3]);
   return object;
 }
 
@@ -127,13 +108,7 @@ P _profileDeserializeProp<P>(
     case 2:
       return (reader.readString(offset)) as P;
     case 3:
-      return (_ProfilelocaleValueEnumMap[reader.readByteOrNull(offset)] ??
-          LocaleMode.enUS) as P;
-    case 4:
       return (reader.readString(offset)) as P;
-    case 5:
-      return (_ProfilethemeValueEnumMap[reader.readByteOrNull(offset)] ??
-          ThemeMode.dark) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -148,24 +123,6 @@ const _ProfilegenderValueEnumMap = {
   0: Gender.male,
   1: Gender.female,
   2: Gender.other,
-};
-const _ProfilelocaleEnumValueMap = {
-  'enUS': 0,
-  'thTH': 1,
-};
-const _ProfilelocaleValueEnumMap = {
-  0: LocaleMode.enUS,
-  1: LocaleMode.thTH,
-};
-const _ProfilethemeEnumValueMap = {
-  'dark': 0,
-  'light': 1,
-  'system': 2,
-};
-const _ProfilethemeValueEnumMap = {
-  0: ThemeMode.dark,
-  1: ThemeMode.light,
-  2: ThemeMode.system,
 };
 
 Id _profileGetId(Profile object) {
@@ -544,59 +501,6 @@ extension ProfileQueryFilter
     });
   }
 
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> localeEqualTo(
-      LocaleMode value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'locale',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> localeGreaterThan(
-    LocaleMode value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'locale',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> localeLessThan(
-    LocaleMode value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'locale',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> localeBetween(
-    LocaleMode lower,
-    LocaleMode upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'locale',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
-
   QueryBuilder<Profile, Profile, QAfterFilterCondition> nameEqualTo(
     String value, {
     bool caseSensitive = true,
@@ -726,59 +630,6 @@ extension ProfileQueryFilter
       ));
     });
   }
-
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> themeEqualTo(
-      ThemeMode value) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'theme',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> themeGreaterThan(
-    ThemeMode value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.greaterThan(
-        include: include,
-        property: r'theme',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> themeLessThan(
-    ThemeMode value, {
-    bool include = false,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.lessThan(
-        include: include,
-        property: r'theme',
-        value: value,
-      ));
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterFilterCondition> themeBetween(
-    ThemeMode lower,
-    ThemeMode upper, {
-    bool includeLower = true,
-    bool includeUpper = true,
-  }) {
-    return QueryBuilder.apply(this, (query) {
-      return query.addFilterCondition(FilterCondition.between(
-        property: r'theme',
-        lower: lower,
-        includeLower: includeLower,
-        upper: upper,
-        includeUpper: includeUpper,
-      ));
-    });
-  }
 }
 
 extension ProfileQueryObject
@@ -824,18 +675,6 @@ extension ProfileQuerySortBy on QueryBuilder<Profile, Profile, QSortBy> {
     });
   }
 
-  QueryBuilder<Profile, Profile, QAfterSortBy> sortByLocale() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'locale', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterSortBy> sortByLocaleDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'locale', Sort.desc);
-    });
-  }
-
   QueryBuilder<Profile, Profile, QAfterSortBy> sortByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -845,18 +684,6 @@ extension ProfileQuerySortBy on QueryBuilder<Profile, Profile, QSortBy> {
   QueryBuilder<Profile, Profile, QAfterSortBy> sortByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterSortBy> sortByTheme() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'theme', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterSortBy> sortByThemeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'theme', Sort.desc);
     });
   }
 }
@@ -911,18 +738,6 @@ extension ProfileQuerySortThenBy
     });
   }
 
-  QueryBuilder<Profile, Profile, QAfterSortBy> thenByLocale() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'locale', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterSortBy> thenByLocaleDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'locale', Sort.desc);
-    });
-  }
-
   QueryBuilder<Profile, Profile, QAfterSortBy> thenByName() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.asc);
@@ -932,18 +747,6 @@ extension ProfileQuerySortThenBy
   QueryBuilder<Profile, Profile, QAfterSortBy> thenByNameDesc() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'name', Sort.desc);
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterSortBy> thenByTheme() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'theme', Sort.asc);
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QAfterSortBy> thenByThemeDesc() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'theme', Sort.desc);
     });
   }
 }
@@ -969,22 +772,10 @@ extension ProfileQueryWhereDistinct
     });
   }
 
-  QueryBuilder<Profile, Profile, QDistinct> distinctByLocale() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'locale');
-    });
-  }
-
   QueryBuilder<Profile, Profile, QDistinct> distinctByName(
       {bool caseSensitive = true}) {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'name', caseSensitive: caseSensitive);
-    });
-  }
-
-  QueryBuilder<Profile, Profile, QDistinct> distinctByTheme() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'theme');
     });
   }
 }
@@ -1015,21 +806,9 @@ extension ProfileQueryProperty
     });
   }
 
-  QueryBuilder<Profile, LocaleMode, QQueryOperations> localeProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'locale');
-    });
-  }
-
   QueryBuilder<Profile, String, QQueryOperations> nameProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'name');
-    });
-  }
-
-  QueryBuilder<Profile, ThemeMode, QQueryOperations> themeProperty() {
-    return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'theme');
     });
   }
 }
