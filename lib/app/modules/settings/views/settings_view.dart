@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
-import 'package:phr/app/data/models/profile.dart';
-import 'package:phr/app/data/models/setting.dart';
 
 import '../../../controllers/app_controller.dart';
+import '../../../data/models/profile.dart';
+import '../../../data/models/setting.dart';
 import '../../../widgets/views/profile_button_view.dart';
 
 class SettingsView extends GetView {

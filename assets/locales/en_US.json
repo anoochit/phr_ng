@@ -36,5 +36,7 @@
   "other": "Other",
   "dark": "Dark",
   "light": "Light",
-  "system": "System"
+  "system": "System",
+  "cancel": "Cancel",
+  "save": "save"
 }
