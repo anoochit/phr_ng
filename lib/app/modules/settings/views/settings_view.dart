@@ -2,6 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
+import 'package:phr/app/data/models/profile.dart';
+import 'package:phr/app/data/models/setting.dart';
 
 import '../../../controllers/app_controller.dart';
 import '../../../widgets/views/profile_button_view.dart';
@@ -57,9 +59,11 @@ class SettingsView extends GetView {
                 ListTile(
                   leading: const Icon(Icons.account_circle),
                   title: Text('name'.tr),
-                  onTap: () {
-                    //  TODO : setting display name
-                  },
+                  onTap: () => buildNameSettingDialog(
+                    context,
+                    controller,
+                    name,
+                  ),
                   trailing: Text(
                     name,
                     style: Theme.of(context).textTheme.bodyMedium,
@@ -70,11 +74,13 @@ class SettingsView extends GetView {
                 ListTile(
                   leading: const Icon(Icons.person),
                   title: Text('gender'.tr),
-                  onTap: () {
-                    // TODO : setting gener
-                  },
+                  onTap: () => buildGenderSettingDialog(
+                    context,
+                    controller,
+                    profile.gender,
+                  ),
                   trailing: Text(
-                    gender,
+                    gender.tr,
                     style: Theme.of(context).textTheme.bodyMedium,
                   ),
                 ),
@@ -83,9 +89,11 @@ class SettingsView extends GetView {
                 ListTile(
                   leading: const Icon(Icons.person_add),
                   title: Text('age'.tr),
-                  onTap: () {
-                    // TODO : setting age
-                  },
+                  onTap: () => buildAgeSettingDialog(
+                    context,
+                    controller,
+                    profile.age,
+                  ),
                   trailing: Text(
                     age,
                     style: Theme.of(context).textTheme.bodyMedium,
@@ -96,9 +104,11 @@ class SettingsView extends GetView {
                 ListTile(
                   leading: const Icon(Icons.contrast),
                   title: Text('theme'.tr),
-                  onTap: () {
-                    // TODO : setting theme
-                  },
+                  onTap: () => buildThemeSettingDialog(
+                    context,
+                    controller,
+                    setting.theme,
+                  ),
                   trailing: Text(
                     theme.tr,
                     style: Theme.of(context).textTheme.bodyMedium,
@@ -109,9 +119,11 @@ class SettingsView extends GetView {
                 ListTile(
                   leading: const Icon(Icons.language),
                   title: Text('locale'.tr),
-                  onTap: () {
-                    // TODO :setting locale
-                  },
+                  onTap: () => buildLocaleSettingDialog(
+                    context,
+                    controller,
+                    setting.locale,
+                  ),
                   trailing: Text(
                     locale.tr,
                     style: Theme.of(context).textTheme.bodyMedium,
@@ -122,6 +134,188 @@ class SettingsView extends GetView {
           );
         },
       ),
+    );
+  }
+
+  // show name setting dialog
+  buildNameSettingDialog(
+    BuildContext context,
+    AppController controller,
+    String name,
+  ) {
+    //  TODO : setting display name
+    showDialog(
+      context: context,
+      builder: (context) {
+        TextEditingController textEditingController = TextEditingController();
+        textEditingController.text = name;
+        return AlertDialog(
+          title: Text('name'.tr),
+          content: TextFormField(
+            controller: textEditingController,
+            decoration: InputDecoration(
+              hintText: 'name'.tr,
+            ),
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Get.back(),
+              child: Text('cancel'.tr),
+            ),
+            TextButton(
+              onPressed: () {
+                controller.saveName(
+                  name: textEditingController.text,
+                );
+                Get.back();
+              },
+              child: Text('save'.tr),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  // show gender setting dialog
+  buildGenderSettingDialog(
+    BuildContext context,
+    AppController controller,
+    Gender gender,
+  ) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('gender'.tr),
+          content: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(Gender.values.length, (index) {
+              return SizedBox(
+                width: Get.width,
+                child: TextButton(
+                  onPressed: () {
+                    // save gender
+                    controller.saveGender(gender: Gender.values[index]);
+                    Get.back();
+                  },
+                  child: Text(
+                    controller.getGenderTitle(Gender.values[index]).tr,
+                  ),
+                ),
+              );
+            }),
+          ),
+        );
+      },
+    );
+  }
+
+  // show age setting dialog
+  buildAgeSettingDialog(
+    BuildContext context,
+    AppController controller,
+    int age,
+  ) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        TextEditingController textEditingController = TextEditingController();
+        textEditingController.text = '$age';
+        return AlertDialog(
+          title: Text('age'.tr),
+          content: TextFormField(
+            controller: textEditingController,
+            decoration: InputDecoration(
+              hintText: 'age'.tr,
+            ),
+            keyboardType: TextInputType.number,
+          ),
+          actions: [
+            TextButton(
+              onPressed: () => Get.back(),
+              child: Text('cancel'.tr),
+            ),
+            TextButton(
+              onPressed: () {
+                controller.saveAge(
+                  age: int.parse(textEditingController.text),
+                );
+                Get.back();
+              },
+              child: Text('save'.tr),
+            )
+          ],
+        );
+      },
+    );
+  }
+
+  buildThemeSettingDialog(
+    BuildContext context,
+    AppController controller,
+    ThemeStatus theme,
+  ) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('theme'.tr),
+          content: Flex(
+            direction: Axis.vertical,
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(ThemeStatus.values.length, (index) {
+              return SizedBox(
+                width: Get.width,
+                child: TextButton(
+                  onPressed: () {
+                    // save theme
+                    controller.saveThemeSetting(ThemeStatus.values[index]);
+                    Get.back();
+                  },
+                  child: Text(
+                    controller.getThemeTitle(ThemeStatus.values[index]).tr,
+                  ),
+                ),
+              );
+            }),
+          ),
+        );
+      },
+    );
+  }
+
+  buildLocaleSettingDialog(
+    BuildContext context,
+    AppController controller,
+    LocaleStatus locale,
+  ) {
+    showDialog(
+      context: context,
+      builder: (context) {
+        return AlertDialog(
+          title: Text('locale'.tr),
+          content: Flex(
+            direction: Axis.vertical,
+            mainAxisSize: MainAxisSize.min,
+            children: List.generate(LocaleStatus.values.length, (index) {
+              return SizedBox(
+                width: Get.width,
+                child: TextButton(
+                  onPressed: () {
+                    // save theme
+                    controller.saveLocaleSetting(LocaleStatus.values[index]);
+                    Get.back();
+                  },
+                  child: Text(
+                    controller.getLocaleTitle(LocaleStatus.values[index]).tr,
+                  ),
+                ),
+              );
+            }),
+          ),
+        );
+      },
     );
   }
 }

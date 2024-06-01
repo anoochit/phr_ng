@@ -13,9 +13,7 @@ Future<void> main() async {
   // init app controller
   AppController appController = Get.put(AppController(), permanent: true);
   // init database
-  final db = await initDatabase();
-  // inject datbase instance
-  appController.db = db;
+  await initDatabase();
   // load data
   await appController.loadData();
   // run app

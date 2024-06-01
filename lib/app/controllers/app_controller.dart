@@ -100,9 +100,9 @@ class AppController extends GetxController {
     update();
   }
 
+  // load setting data
   Future<void> loadSettingData() async {
     final value = await db.settings.get(1);
-
     log('load setting data');
     // no profile data, create a template once
     if (value == null) {
@@ -121,6 +121,7 @@ class AppController extends GetxController {
     update(['setting']);
   }
 
+  // get theme title
   String getThemeTitle(ThemeStatus theme) {
     switch (theme) {
       case ThemeStatus.dark:
@@ -137,50 +138,114 @@ class AppController extends GetxController {
     }
   }
 
+  // get theme value
   ThemeMode getThemeValue() {
     switch (setting.theme) {
       case ThemeStatus.dark:
         return ThemeMode.dark;
-
       case ThemeStatus.light:
         return ThemeMode.light;
-
       case ThemeStatus.system:
         return ThemeMode.system;
-
       default:
         return ThemeMode.light;
     }
   }
 
+  // get locale value
   String getLocaleValue() {
     final locale = setting.locale;
     return '${locale.name.substring(0, 2)}_${locale.name.substring(2, 4)}';
   }
 
-  getLocaleTitle(LocaleStatus locale) {
+  // get local title
+  String getLocaleTitle(LocaleStatus locale) {
     switch (locale) {
       case LocaleStatus.enUS:
         return 'english';
-
       case LocaleStatus.thTH:
         return 'thai';
-
       default:
         return 'english';
     }
   }
 
-  getGenderTitle(Gender gender) {
+  // get gender title
+  String getGenderTitle(Gender gender) {
     switch (gender) {
       case Gender.male:
         return 'male';
-
       case Gender.female:
         return 'female';
-
       default:
         return 'other';
     }
+  }
+
+  // save theme setting
+  saveThemeSetting(ThemeStatus theme) async {
+    // save setting storage
+    final data = await db.settings.get(1);
+    // write default value
+    await db.writeTxn(() async {
+      data!.theme = theme;
+      await db.settings.put(data);
+      setting = data;
+      Get.changeThemeMode(getThemeValue());
+      update();
+    });
+  }
+
+  // save locale setting
+  saveLocaleSetting(LocaleStatus locale) async {
+    // save setting storage
+    final data = await db.settings.get(1);
+    // write default value
+    await db.writeTxn(() async {
+      data!.locale = locale;
+      await db.settings.put(data);
+      setting = data;
+      Get.updateLocale(Locale(getLocaleValue()));
+      update();
+    });
+  }
+
+  // save age
+  saveAge({required int age}) async {
+    // save setting storage
+    final user = await db.profiles.get(1);
+    // write default value
+    await db.writeTxn(() async {
+      user!.age = age;
+      await db.profiles.put(user);
+      profile = user;
+      update();
+    });
+  }
+
+  // save gender
+  saveGender({required Gender gender}) async {
+    // save setting storage
+    final user = await db.profiles.get(1);
+    // write default value
+    await db.writeTxn(() async {
+      user!.gender = gender;
+      await db.profiles.put(user);
+      profile = user;
+      update();
+    });
+  }
+
+  // save name
+  saveName({required String name}) async {
+    // save setting storage
+    final user = await db.profiles.get(1);
+    // write default value
+    await db.writeTxn(() async {
+      user!.name = name;
+      await db.profiles.put(user);
+      profile = user;
+      update();
+    });
   }
 }
