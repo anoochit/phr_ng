@@ -73,9 +73,9 @@ Setting _settingDeserialize(
   object.id = id;
   object.locale =
       _SettinglocaleValueEnumMap[reader.readByteOrNull(offsets[0])] ??
-          LocaleMode.enUS;
+          LocaleStatus.enUS;
   object.theme = _SettingthemeValueEnumMap[reader.readByteOrNull(offsets[1])] ??
-      ThemeMode.dark;
+      ThemeStatus.dark;
   return object;
 }
 
@@ -88,10 +88,10 @@ P _settingDeserializeProp<P>(
   switch (propertyId) {
     case 0:
       return (_SettinglocaleValueEnumMap[reader.readByteOrNull(offset)] ??
-          LocaleMode.enUS) as P;
+          LocaleStatus.enUS) as P;
     case 1:
       return (_SettingthemeValueEnumMap[reader.readByteOrNull(offset)] ??
-          ThemeMode.dark) as P;
+          ThemeStatus.dark) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
   }
@@ -102,8 +102,8 @@ const _SettinglocaleEnumValueMap = {
   'thTH': 1,
 };
 const _SettinglocaleValueEnumMap = {
-  0: LocaleMode.enUS,
-  1: LocaleMode.thTH,
+  0: LocaleStatus.enUS,
+  1: LocaleStatus.thTH,
 };
 const _SettingthemeEnumValueMap = {
   'dark': 0,
@@ -111,9 +111,9 @@ const _SettingthemeEnumValueMap = {
   'system': 2,
 };
 const _SettingthemeValueEnumMap = {
-  0: ThemeMode.dark,
-  1: ThemeMode.light,
-  2: ThemeMode.system,
+  0: ThemeStatus.dark,
+  1: ThemeStatus.light,
+  2: ThemeStatus.system,
 };
 
 Id _settingGetId(Setting object) {
@@ -258,7 +258,7 @@ extension SettingQueryFilter
   }
 
   QueryBuilder<Setting, Setting, QAfterFilterCondition> localeEqualTo(
-      LocaleMode value) {
+      LocaleStatus value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'locale',
@@ -268,7 +268,7 @@ extension SettingQueryFilter
   }
 
   QueryBuilder<Setting, Setting, QAfterFilterCondition> localeGreaterThan(
-    LocaleMode value, {
+    LocaleStatus value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -281,7 +281,7 @@ extension SettingQueryFilter
   }
 
   QueryBuilder<Setting, Setting, QAfterFilterCondition> localeLessThan(
-    LocaleMode value, {
+    LocaleStatus value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -294,8 +294,8 @@ extension SettingQueryFilter
   }
 
   QueryBuilder<Setting, Setting, QAfterFilterCondition> localeBetween(
-    LocaleMode lower,
-    LocaleMode upper, {
+    LocaleStatus lower,
+    LocaleStatus upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -311,7 +311,7 @@ extension SettingQueryFilter
   }
 
   QueryBuilder<Setting, Setting, QAfterFilterCondition> themeEqualTo(
-      ThemeMode value) {
+      ThemeStatus value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
         property: r'theme',
@@ -321,7 +321,7 @@ extension SettingQueryFilter
   }
 
   QueryBuilder<Setting, Setting, QAfterFilterCondition> themeGreaterThan(
-    ThemeMode value, {
+    ThemeStatus value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -334,7 +334,7 @@ extension SettingQueryFilter
   }
 
   QueryBuilder<Setting, Setting, QAfterFilterCondition> themeLessThan(
-    ThemeMode value, {
+    ThemeStatus value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
@@ -347,8 +347,8 @@ extension SettingQueryFilter
   }
 
   QueryBuilder<Setting, Setting, QAfterFilterCondition> themeBetween(
-    ThemeMode lower,
-    ThemeMode upper, {
+    ThemeStatus lower,
+    ThemeStatus upper, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
@@ -458,13 +458,13 @@ extension SettingQueryProperty
     });
   }
 
-  QueryBuilder<Setting, LocaleMode, QQueryOperations> localeProperty() {
+  QueryBuilder<Setting, LocaleStatus, QQueryOperations> localeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'locale');
     });
   }
 
-  QueryBuilder<Setting, ThemeMode, QQueryOperations> themeProperty() {
+  QueryBuilder<Setting, ThemeStatus, QQueryOperations> themeProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'theme');
     });

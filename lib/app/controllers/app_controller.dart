@@ -1,8 +1,8 @@
 import 'dart:developer';
 
+import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 import 'package:isar/isar.dart';
-import 'package:path_provider/path_provider.dart';
 import 'package:phr/app/data/models/setting.dart';
 import 'package:phr/app/data/models/stats_label.dart';
 
@@ -36,41 +36,21 @@ class AppController extends GetxController {
   late Profile profile;
   late Setting setting;
 
-  late Isar _db;
+  late Isar db;
 
-  @override
-  onInit() async {
-    super.onInit();
-
-    log('app init');
-
-    // init db
-    _db = await initializedDatabase();
-
-    // load data
+  loadData() async {
+    // load setting data
+    await loadSettingData();
+    // load another data
     loadProfileData();
     loadBMIData();
     loadBloodPresureData();
     loadGlucoseData();
   }
 
-  Future<Isar> initializedDatabase() async {
-    final dir = await getApplicationDocumentsDirectory();
-    return await Isar.open(
-      [
-        BmiSchema,
-        GlucoseSchema,
-        BloodPressureSchema,
-        ProfileSchema,
-        SettingSchema,
-      ],
-      directory: dir.path,
-    );
-  }
-
   // load bmi data
   loadBMIData() {
-    _db.bmis.where().findAll().then((value) {
+    db.bmis.where().findAll().then((value) {
       log('load bmi data');
       listBMI.value = value;
       update();
@@ -79,7 +59,7 @@ class AppController extends GetxController {
 
   // load glucose data
   loadGlucoseData() {
-    _db.glucoses.where().findAll().then((value) {
+    db.glucoses.where().findAll().then((value) {
       log('load glucose data');
       listGlucose.value = value;
       update();
@@ -88,7 +68,7 @@ class AppController extends GetxController {
 
   // load blood presure data
   loadBloodPresureData() {
-    _db.bloodPressures.where().findAll().then((value) {
+    db.bloodPressures.where().findAll().then((value) {
       log('load blood presure data');
       listBloodPressure.value = value;
       update();
@@ -97,7 +77,7 @@ class AppController extends GetxController {
 
   // load profile data
   loadProfileData() {
-    _db.profiles.get(1).then((value) async {
+    db.profiles.get(1).then((value) async {
       log('load profile data');
       // no profile data, create a template once
       if (value == null) {
@@ -108,8 +88,8 @@ class AppController extends GetxController {
           ..image = ''
           ..id = 1;
         // write default value
-        await _db.writeTxn(() async {
-          await _db.profiles.put(data);
+        await db.writeTxn(() async {
+          await db.profiles.put(data);
         });
         profile = data;
       } else {
@@ -117,35 +97,39 @@ class AppController extends GetxController {
       }
     });
 
-    _db.settings.get(1).then((value) async {
-      log('load profile data');
-      // no profile data, create a template once
-      if (value == null) {
-        final data = Setting()
-          ..theme = ThemeMode.dark
-          ..locale = LocaleMode.enUS;
-        // write default value
-        await _db.writeTxn(() async {
-          await _db.settings.put(data);
-        });
-        setting = data;
-      } else {
-        setting = value;
-      }
-    });
-
     update();
   }
 
-  String getThemeTitle(ThemeMode theme) {
-    switch (theme.name) {
-      case 'dark':
+  Future<void> loadSettingData() async {
+    final value = await db.settings.get(1);
+
+    log('load setting data');
+    // no profile data, create a template once
+    if (value == null) {
+      final data = Setting()
+        ..theme = ThemeStatus.dark
+        ..locale = LocaleStatus.enUS;
+      // write default value
+      await db.writeTxn(() async {
+        await db.settings.put(data);
+        setting = data;
+      });
+    } else {
+      setting = value;
+    }
+
+    update(['setting']);
+  }
+
+  String getThemeTitle(ThemeStatus theme) {
+    switch (theme) {
+      case ThemeStatus.dark:
         return 'dark';
 
-      case 'light':
+      case ThemeStatus.light:
         return 'light';
 
-      case 'system':
+      case ThemeStatus.system:
         return 'system';
 
       default:
@@ -153,12 +137,33 @@ class AppController extends GetxController {
     }
   }
 
-  getLocaleTitle(LocaleMode locale) {
-    switch (locale.name) {
-      case 'enUS':
+  ThemeMode getThemeValue() {
+    switch (setting.theme) {
+      case ThemeStatus.dark:
+        return ThemeMode.dark;
+
+      case ThemeStatus.light:
+        return ThemeMode.light;
+
+      case ThemeStatus.system:
+        return ThemeMode.system;
+
+      default:
+        return ThemeMode.light;
+    }
+  }
+
+  String getLocaleValue() {
+    final locale = setting.locale;
+    return '${locale.name.substring(0, 2)}_${locale.name.substring(2, 4)}';
+  }
+
+  getLocaleTitle(LocaleStatus locale) {
+    switch (locale) {
+      case LocaleStatus.enUS:
         return 'english';
 
-      case 'thTH':
+      case LocaleStatus.thTH:
         return 'thai';
 
       default:
@@ -167,11 +172,11 @@ class AppController extends GetxController {
   }
 
   getGenderTitle(Gender gender) {
-    switch (gender.name) {
-      case 'male':
+    switch (gender) {
+      case Gender.male:
         return 'male';
 
-      case 'female':
+      case Gender.female:
         return 'female';
 
       default:

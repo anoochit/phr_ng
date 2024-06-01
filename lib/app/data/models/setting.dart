@@ -6,18 +6,18 @@ part 'setting.g.dart';
 class Setting {
   Id id = 1;
   @enumerated
-  ThemeMode theme = ThemeMode.dark;
+  ThemeStatus theme = ThemeStatus.dark;
   @enumerated
-  LocaleMode locale = LocaleMode.enUS;
+  LocaleStatus locale = LocaleStatus.enUS;
 }
 
-enum ThemeMode {
+enum ThemeStatus {
   dark,
   light,
   system,
 }
 
-enum LocaleMode {
+enum LocaleStatus {
   enUS,
   thTH,
 }
