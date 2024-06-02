@@ -1,16 +1,20 @@
 import 'dart:developer';
-import 'dart:math' as Math;
+import 'dart:math' as math;
 
 import 'package:flutter/material.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:isar/isar.dart';
 import 'package:phr/app/data/models/setting.dart';
 import 'package:phr/app/data/models/stats_label.dart';
 
 import '../data/models/bmi.dart';
 import '../data/models/glucose.dart';
+import '../data/models/menu_item.dart';
 import '../data/models/pressure.dart';
 import '../data/models/profile.dart';
+import '../routes/app_pages.dart';
 
 class AppController extends GetxController {
   RxList<Bmi> listBMI = <Bmi>[].obs;
@@ -34,6 +38,24 @@ class AppController extends GetxController {
     StatsLabel(title: 'a1c', unit: 'percent'),
   ];
 
+  List<MenuItem> menuItems = [
+    MenuItem(
+      icon: FontAwesomeIcons.weightScale,
+      title: 'body_mass_index',
+      route: Routes.BMI,
+    ),
+    MenuItem(
+      icon: FontAwesomeIcons.heartPulse,
+      title: 'blood_pressure',
+      route: Routes.BLOOD_PRESSURE,
+    ),
+    MenuItem(
+      icon: FontAwesomeIcons.candyCane,
+      title: 'blood_glucose',
+      route: Routes.BLOOD_GLUCOSE,
+    ),
+  ];
+
   late Profile profile;
   late Setting setting;
 
@@ -51,6 +73,7 @@ class AppController extends GetxController {
 
   // load bmi data
   loadBMIData() {
+    listBMI.clear();
     db.bmis.where().findAll().then((value) {
       log('load bmi data');
       listBMI.value = value;
@@ -60,6 +83,7 @@ class AppController extends GetxController {
 
   // load glucose data
   loadGlucoseData() {
+    listGlucose.clear();
     db.glucoses.where().findAll().then((value) {
       log('load glucose data');
       listGlucose.value = value;
@@ -69,6 +93,7 @@ class AppController extends GetxController {
 
   // load blood presure data
   loadBloodPresureData() {
+    listBloodPressure.clear();
     db.bloodPressures.where().findAll().then((value) {
       log('load blood presure data');
       listBloodPressure.value = value;
@@ -86,7 +111,7 @@ class AppController extends GetxController {
           ..name = 'John Doe'
           ..gender = Gender.male
           ..age = 25
-          ..image = ''
+          ..image = []
           ..id = 1;
         // write default value
         await db.writeTxn(() async {
@@ -250,6 +275,27 @@ class AppController extends GetxController {
     });
   }
 
+  // convert xfile to list of int
+  Future<List<int>> convertXFileToList(XFile xFile) async {
+    final bytes = await xFile.readAsBytes();
+    return bytes.toList();
+  }
+
+  // save name
+  savePhoto({required XFile xfile}) async {
+    List<int> image = await convertXFileToList(xfile);
+
+    // save setting storage
+    final user = await db.profiles.get(1);
+    // write default value
+    await db.writeTxn(() async {
+      user!.image = image;
+      await db.profiles.put(user);
+      profile = user;
+      update();
+    });
+  }
+
   // bmi level
   // - Underweight = <18.5
   // - Normal weight = 18.5–24.9
@@ -273,7 +319,7 @@ class AppController extends GetxController {
 
   // bmi calculation
   double bmiCalculation({required double weight, required double height}) {
-    double bmi = weight / Math.pow((height / 100), 2);
+    double bmi = weight / math.pow((height / 100), 2);
     log("bmi value -> $bmi");
     return bmi;
   }
@@ -369,12 +415,18 @@ class AppController extends GetxController {
     return GlucoseStatus.unknow;
   }
 
+  // (Estimated average glucose(mg/dL) + 46.7) / 28.7
+  double glucoseToA1C({required int unit}) {
+    double result = (unit + 46.7) / 28.7;
+    return result;
+  }
+
   // add sample data
   void addSampleData() {
     for (int i = 0; i < 5; i++) {
       // bmi
       db.writeTxn(() async {
-        final weight = (70.0 + Math.Random().nextInt(5));
+        final weight = (70.0 + math.Random().nextInt(5));
         const height = 165.0;
         final bmi = bmiCalculation(weight: weight, height: height);
         final level = bmiLevel(bmi: bmi);
@@ -390,9 +442,9 @@ class AppController extends GetxController {
 
       // blood pressure
       db.writeTxn(() async {
-        final sys = 80 + Math.Random().nextInt(30);
-        final dia = 80 + Math.Random().nextInt(30);
-        final pul = 80 + Math.Random().nextInt(10);
+        final sys = 80 + math.Random().nextInt(30);
+        final dia = 80 + math.Random().nextInt(30);
+        final pul = 80 + math.Random().nextInt(10);
         final level = bloodPressureCalculation(systolic: sys, diastolic: dia);
 
         final data = BloodPressure()
@@ -407,7 +459,7 @@ class AppController extends GetxController {
 
       // glucose
       db.writeTxn(() async {
-        final unit = 80 + Math.Random().nextInt(30);
+        final unit = 80 + math.Random().nextInt(30);
         final level = glucoseCalculation(
           measureAt: MeasureAt.fasting,
           unit: unit,

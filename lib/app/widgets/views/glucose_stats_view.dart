@@ -16,7 +16,7 @@ class GlucoseStatsView extends GetView<AppController> {
     final listGlucose = controller.listGlucose;
 
     return Obx(
-      () => (!listGlucose.isNotEmpty)
+      () => (listGlucose.isNotEmpty)
           ? Card(
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: InkWell(

@@ -38,18 +38,29 @@ class BloodPressureView extends GetView {
               itemBuilder: (context, index) {
                 // TODO : add value
                 final label = controller.listBloodPressureLabel;
+                final item = controller.listBloodPressure.last;
+
+                int? value = (index == 0)
+                    ? item.systolic
+                    : (index == 1)
+                        ? item.diastolic
+                        : (index == 2)
+                            ? item.pulse
+                            : null;
 
                 return StatsCardBoxView(
                   title: label[index].title.tr,
-                  value: 'value',
+                  value: '$value',
                   unit: label[index].unit.tr,
                 );
               },
             ),
 
-            // graphs
+            // TODO : add result
 
-            // history button
+            // TODO : add graphs
+
+            // TODO : add history button
             HistoryButtonView(onTap: () {}),
           ],
         );

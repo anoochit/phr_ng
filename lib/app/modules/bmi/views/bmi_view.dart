@@ -48,6 +48,8 @@ class BmiView extends GetView {
                 },
               ),
 
+              // TODO : add result
+
               // TODO : add graphs
 
               // TODO : add history button

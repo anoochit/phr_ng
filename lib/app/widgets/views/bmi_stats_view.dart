@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:phr/app/themes/theme.dart';
 
 import '../../controllers/app_controller.dart';
 import 'stats_box_view.dart';
@@ -19,7 +18,7 @@ class BmiStatsView extends GetView<AppController> {
     final listBMI = controller.listBMI;
 
     return Obx(
-      () => (!listBMI.isNotEmpty)
+      () => (listBMI.isNotEmpty)
           ? Card(
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: InkWell(

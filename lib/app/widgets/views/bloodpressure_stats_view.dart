@@ -12,9 +12,8 @@ class BloodpressureStatsView extends GetView<AppController> {
   final VoidCallback? onTap;
   @override
   Widget build(BuildContext context) {
-    final listBloodPressure = controller.listBloodPressure;
     return Obx(
-      () => (!listBloodPressure.isNotEmpty)
+      () => (controller.listBloodPressure.isNotEmpty)
           ? Card(
               clipBehavior: Clip.antiAliasWithSaveLayer,
               child: InkWell(
@@ -43,9 +42,19 @@ class BloodpressureStatsView extends GetView<AppController> {
                         itemBuilder: (context, index) {
                           // TODO : insert value
                           final label = controller.listBloodPressureLabel;
+                          final item = controller.listBloodPressure.last;
+
+                          int? value = (index == 0)
+                              ? item.systolic
+                              : (index == 1)
+                                  ? item.diastolic
+                                  : (index == 2)
+                                      ? item.pulse
+                                      : null;
+
                           return StatsBoxView(
                             title: label[index].title.tr,
-                            value: 'value',
+                            value: '$value',
                             unit: label[index].unit.tr,
                           );
                         },

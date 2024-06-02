@@ -1,16 +1,21 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:phr/app/controllers/app_controller.dart';
 
 import '../../../widgets/views/menu_item_view.dart';
-import '../controllers/home_controller.dart';
 
-class MenuView extends GetView<HomeController> {
+class MenuView extends GetView<AppController> {
   const MenuView({super.key});
 
   @override
   Widget build(BuildContext context) {
     final menus = controller.menuItems;
+    final datas = [
+      controller.listBMI,
+      controller.listBloodPressure,
+      controller.listGlucose,
+    ];
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -25,7 +30,7 @@ class MenuView extends GetView<HomeController> {
         return MenuItemView(
           title: title.tr,
           icon: icon,
-          onTap: () => Get.toNamed(route),
+          onTap: () => (datas[index].isNotEmpty) ? Get.toNamed(route) : null,
         );
       },
     );

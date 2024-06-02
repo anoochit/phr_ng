@@ -1,11 +1,7 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
-import 'package:phr/app/controllers/app_controller.dart';
-import 'package:phr/app/routes/app_pages.dart';
-import 'package:phr/app/widgets/views/sample_button_view.dart';
-import '../controllers/home_controller.dart';
+import '../../../routes/app_pages.dart';
 import '../../../widgets/views/bloodpressure_stats_view.dart';
 import '../../../widgets/views/bmi_stats_view.dart';
 import '../../../widgets/views/glucose_stats_view.dart';
@@ -21,32 +17,28 @@ class HomeView extends GetView {
         centerTitle: false,
         actions: buildPopupMenu,
       ),
-      body: GetBuilder<AppController>(
-        builder: (context) {
-          return ListView(
-            children: [
-              // menu
-              MenuView(),
+      body: ListView(
+        children: [
+          // menu
+          const MenuView(),
 
-              // TODO : show add sample data only in debug mode
+          // TODO : show add sample data only in debug mode
 
-              // bmi stats with graph
-              BmiStatsView(
-                onTap: () => Get.toNamed(Routes.BMI),
-              ),
+          // bmi stats with graph
+          BmiStatsView(
+            onTap: () => Get.toNamed(Routes.BMI),
+          ),
 
-              // blood pressure
-              BloodpressureStatsView(
-                onTap: () => Get.toNamed(Routes.BLOOD_PRESSURE),
-              ),
+          // blood pressure
+          BloodpressureStatsView(
+            onTap: () => Get.toNamed(Routes.BLOOD_PRESSURE),
+          ),
 
-              // blood glucose
-              GlucoseStatsView(
-                onTap: () => Get.toNamed(Routes.BLOOD_GLUCOSE),
-              )
-            ],
-          );
-        },
+          // blood glucose
+          GlucoseStatsView(
+            onTap: () => Get.toNamed(Routes.BLOOD_GLUCOSE),
+          )
+        ],
       ),
     );
   }

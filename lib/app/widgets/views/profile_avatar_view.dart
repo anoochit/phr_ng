@@ -1,4 +1,4 @@
-import 'dart:io';
+import 'dart:typed_data';
 
 import 'package:flutter/material.dart';
 
@@ -13,7 +13,7 @@ class ProfileAvatarView extends GetView {
   });
 
   final String title;
-  final String? image;
+  final Uint8List? image;
   final Color backgroundColor;
 
   @override
@@ -21,15 +21,16 @@ class ProfileAvatarView extends GetView {
     return CircleAvatar(
       radius: 48.0,
       backgroundColor: backgroundColor,
-      child: (image == '')
-          ? const Icon(
-              Icons.person,
-              size: 48.0,
-            )
-          : Image.file(
-              File(image!),
-              fit: BoxFit.cover,
-            ),
+      child: Image.memory(
+        image!,
+        fit: BoxFit.cover,
+        errorBuilder: (context, error, stackTrace) {
+          return const Icon(
+            Icons.person,
+            size: 48.0,
+          );
+        },
+      ),
     );
   }
 }

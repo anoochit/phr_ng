@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -21,7 +23,7 @@ class SettingsView extends GetView {
         builder: (controller) {
           final profile = controller.profile;
           final setting = controller.setting;
-          String image = profile.image;
+          Uint8List image = Uint8List.fromList(profile.image);
           String name = profile.name;
           String theme = controller.getThemeTitle(setting.theme);
           String locale = controller.getLocaleTitle(setting.locale);

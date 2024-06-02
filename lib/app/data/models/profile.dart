@@ -6,7 +6,7 @@ part 'profile.g.dart';
 class Profile {
   Id id = 1;
   late String name;
-  late String image;
+  late List<int> image;
   late int age;
   @enumerated
   Gender gender = Gender.male;

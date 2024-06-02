@@ -1,3 +1,5 @@
+import 'dart:typed_data';
+
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
@@ -21,7 +23,7 @@ class ShareView extends GetView {
       body: GetBuilder<AppController>(
         builder: (controller) {
           final profile = controller.profile;
-          final image = profile.image;
+          final image = Uint8List.fromList(profile.image);
           final name = profile.name;
           return SingleChildScrollView(
             child: Column(

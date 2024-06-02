@@ -49,9 +49,11 @@ class BloodGlucoseView extends GetView {
                 },
               ),
 
-              // graphs
+              // TODO : add result
 
-              // history button
+              // TODO : add graphs
+
+              // TODO : add history button
               HistoryButtonView(onTap: () {}),
             ],
           );

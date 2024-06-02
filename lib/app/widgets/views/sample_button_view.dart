@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import 'package:phr/app/controllers/app_controller.dart';
 
 class SampleButtonView extends GetView<AppController> {
-  const SampleButtonView({Key? key}) : super(key: key);
+  const SampleButtonView({super.key});
   @override
   Widget build(BuildContext context) {
     return (kDebugMode)
@@ -14,8 +14,8 @@ class SampleButtonView extends GetView<AppController> {
               // add sample data
               controller.addSampleData();
             },
-            child: Text('Add sample data'),
+            child: const Text('Add sample data'),
           )
-        : SizedBox();
+        : const SizedBox();
   }
 }
