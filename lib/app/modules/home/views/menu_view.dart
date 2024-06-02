@@ -13,6 +13,7 @@ class MenuView extends GetView<HomeController> {
     final menus = controller.menuItems;
     return GridView.builder(
       shrinkWrap: true,
+      physics: const NeverScrollableScrollPhysics(),
       gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
         crossAxisCount: 3,
       ),

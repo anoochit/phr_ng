@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:math' as Math;
 
 import 'package:flutter/material.dart';
 import 'package:get/get.dart';
@@ -247,5 +248,179 @@ class AppController extends GetxController {
       profile = user;
       update();
     });
+  }
+
+  // bmi level
+  // - Underweight = <18.5
+  // - Normal weight = 18.5–24.9
+  // - Overweight = 25–29.9
+  // - Obesity = BMI of 30 or greater
+  BmiStatus bmiLevel({required double bmi}) {
+    if (bmi < 18.5) {
+      log("bmi status -> 0");
+      return BmiStatus.underWeight;
+    } else if ((bmi >= 18.5) && (bmi <= 24.9)) {
+      log("bmi status -> 1");
+      return BmiStatus.normalWeight;
+    } else if ((bmi >= 25) && (bmi <= 29.9)) {
+      log("bmi status -> 2");
+      return BmiStatus.overWeight;
+    } else {
+      log("bmi status -> 3");
+      return BmiStatus.obesity;
+    }
+  }
+
+  // bmi calculation
+  double bmiCalculation({required double weight, required double height}) {
+    double bmi = weight / Math.pow((height / 100), 2);
+    log("bmi value -> $bmi");
+    return bmi;
+  }
+
+  // blood pressure calculation
+  // 0 - hypo
+  // 1 - normal
+  // 2 - pre-hyper
+  // 3 - hyper state 1
+  // 4 - hyper state 2
+  BloodPresureStatus bloodPressureCalculation(
+      {required int systolic, required int diastolic}) {
+    log("$systolic/$diastolic");
+    if ((systolic <= 90) && (diastolic <= 60)) {
+      log("bp status -> 0");
+      return BloodPresureStatus.hypo;
+    } else if ((systolic <= 120) && (diastolic <= 80)) {
+      log("bp status -> 1");
+      return BloodPresureStatus.normal;
+    } else if ((systolic <= 140) && (diastolic <= 90)) {
+      log("bp status -> 2");
+      return BloodPresureStatus.preHyper;
+    } else if ((systolic <= 160) && (diastolic <= 100)) {
+      log("bp status -> 3");
+      return BloodPresureStatus.hyperState1;
+    } else {
+      log("bp status -> 4");
+      return BloodPresureStatus.hyperState2;
+    }
+  }
+
+  // calculate glucose level
+  // ref
+  //  - https://www.lark.com/blog/blood-sugar-chart/
+  //  - https://ebmcalc.com/GlycemicAssessment.htm
+  //
+  // 0 = fasting, 1 = After Eating, 2 = 2-3 After Eating
+  GlucoseStatus glucoseCalculation(
+      {required MeasureAt measureAt, required int unit}) {
+    // calculate fasting
+    if (measureAt == MeasureAt.fasting) {
+      if ((unit >= 80) && (unit <= 100)) {
+        // normal
+        return GlucoseStatus.normal;
+      } else if ((unit >= 101) && (unit <= 125)) {
+        // impaired
+        return GlucoseStatus.impaired;
+      } else if (unit >= 126) {
+        // diabetic
+        return GlucoseStatus.diabetic;
+      } else {
+        // unknow
+        return GlucoseStatus.unknow;
+      }
+    }
+
+    // calculate after eating
+    if (measureAt == MeasureAt.afterEating) {
+      //if ((unit >= 170) && (unit <= 200)) {
+      if ((unit >= 80) && (unit <= 200)) {
+        // normal
+        return GlucoseStatus.normal;
+      } else if ((unit >= 190) && (unit <= 230)) {
+        // impaired
+        return GlucoseStatus.impaired;
+      } else if ((unit >= 220)) {
+        // diabetic
+        return GlucoseStatus.diabetic;
+      } else {
+        // unknow
+        return GlucoseStatus.unknow;
+      }
+    }
+
+    // calculate 2-3 hrs after eating
+    if (measureAt == MeasureAt.afterEating23hr) {
+      //if ((unit >= 120) && (unit <= 140)) {
+      if ((unit >= 80) && (unit <= 140)) {
+        // normal
+        return GlucoseStatus.normal;
+      } else if ((unit >= 140) && (unit <= 200)) {
+        // impaired
+        return GlucoseStatus.impaired;
+      } else if ((unit >= 200)) {
+        // diabetic
+        return GlucoseStatus.diabetic;
+      } else {
+        // unknow
+        return GlucoseStatus.unknow;
+      }
+    }
+
+    return GlucoseStatus.unknow;
+  }
+
+  // add sample data
+  void addSampleData() {
+    for (int i = 0; i < 5; i++) {
+      // bmi
+      db.writeTxn(() async {
+        final weight = (70.0 + Math.Random().nextInt(5));
+        const height = 165.0;
+        final bmi = bmiCalculation(weight: weight, height: height);
+        final level = bmiLevel(bmi: bmi);
+
+        final data = Bmi()
+          ..timestamp = DateTime.now()
+          ..weight = weight
+          ..height = height
+          ..bmi = bmi
+          ..status = level;
+        await db.bmis.put(data);
+      });
+
+      // blood pressure
+      db.writeTxn(() async {
+        final sys = 80 + Math.Random().nextInt(30);
+        final dia = 80 + Math.Random().nextInt(30);
+        final pul = 80 + Math.Random().nextInt(10);
+        final level = bloodPressureCalculation(systolic: sys, diastolic: dia);
+
+        final data = BloodPressure()
+          ..timpstamp = DateTime.now()
+          ..systolic = sys
+          ..diastolic = dia
+          ..pulse = pul
+          ..status = level;
+
+        await db.bloodPressures.put(data);
+      });
+
+      // glucose
+      db.writeTxn(() async {
+        final unit = 80 + Math.Random().nextInt(30);
+        final level = glucoseCalculation(
+          measureAt: MeasureAt.fasting,
+          unit: unit,
+        );
+
+        final data = Glucose()
+          ..timestamp = DateTime.now()
+          ..measureAt = MeasureAt.fasting
+          ..unit = unit
+          ..status = level;
+
+        await db.glucoses.put(data);
+      });
+    }
   }
 }
