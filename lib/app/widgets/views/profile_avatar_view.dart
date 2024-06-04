@@ -18,19 +18,20 @@ class ProfileAvatarView extends GetView {
 
   @override
   Widget build(BuildContext context) {
-    return CircleAvatar(
-      radius: 48.0,
-      backgroundColor: backgroundColor,
-      child: Image.memory(
-        image!,
-        fit: BoxFit.cover,
-        errorBuilder: (context, error, stackTrace) {
-          return const Icon(
-            Icons.person,
-            size: 48.0,
+    final size = image!.buffer.lengthInBytes;
+    return (size > 0)
+        ? CircleAvatar(
+            radius: 56.0,
+            backgroundColor: backgroundColor,
+            foregroundImage: MemoryImage(image!),
+          )
+        : CircleAvatar(
+            radius: 56.0,
+            backgroundColor: backgroundColor,
+            child: const Icon(
+              Icons.person,
+              size: 48.0,
+            ),
           );
-        },
-      ),
-    );
   }
 }

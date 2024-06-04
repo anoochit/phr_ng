@@ -20,30 +20,31 @@ class ProfileAvatarButtonView extends GetView {
 
   @override
   Widget build(BuildContext context) {
+    final size = image!.buffer.lengthInBytes;
     return SizedBox(
       width: (56 * 2) + 8,
       height: (56 * 2),
       child: Stack(
         children: [
-          CircleAvatar(
-            radius: 56.0,
-            backgroundColor: backgroundColor,
-            child: Image.memory(
-              image!,
-              fit: BoxFit.cover,
-              errorBuilder: (context, error, stackTrace) {
-                return const Icon(
-                  Icons.person,
-                  size: 48.0,
-                );
-              },
-            ),
-          ),
+          (size > 0)
+              ? CircleAvatar(
+                  radius: 56.0,
+                  backgroundColor: backgroundColor,
+                  foregroundImage: MemoryImage(image!),
+                )
+              : CircleAvatar(
+                  radius: 56.0,
+                  backgroundColor: backgroundColor,
+                  child: const Icon(
+                    Icons.person,
+                    size: 48.0,
+                  ),
+                ),
           Positioned(
             bottom: 0,
             right: 0,
             child: IconButton.filledTonal(
-              onPressed: () {},
+              onPressed: () => onTap(),
               icon: const Icon(Icons.edit),
             ),
           ),
