@@ -11,11 +11,7 @@ class MenuView extends GetView<AppController> {
   @override
   Widget build(BuildContext context) {
     final menus = controller.menuItems;
-    final datas = [
-      controller.listBMI,
-      controller.listBloodPressure,
-      controller.listGlucose,
-    ];
+
     return GridView.builder(
       shrinkWrap: true,
       physics: const NeverScrollableScrollPhysics(),
@@ -28,8 +24,9 @@ class MenuView extends GetView<AppController> {
         final icon = menus[index].icon;
         final route = menus[index].route;
         return MenuItemView(
-          title: title.tr, icon: icon, onTap: () => Get.toNamed(route),
-          // onTap: () => (datas[index].isNotEmpty) ? Get.toNamed(route) : null,
+          title: title.tr,
+          icon: icon,
+          onTap: () => Get.toNamed(route),
         );
       },
     );
