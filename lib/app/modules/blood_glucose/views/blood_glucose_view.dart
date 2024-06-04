@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:phr/app/widgets/views/nodata_stats_view.dart';
 
 import '../../../controllers/app_controller.dart';
@@ -46,9 +47,17 @@ class BloodGlucoseView extends GetView {
                       itemBuilder: (context, index) {
                         // TODO : add value
                         final label = controller.listGlucoseLabel;
+                        final item = controller.listGlucose.last;
+                        final f = NumberFormat('##.0#');
+                        final value = (index == 0)
+                            ? item.unit
+                            : (index == 1)
+                                ? item.a1c
+                                : null;
+
                         return StatsCardBoxView(
                           title: label[index].title.tr,
-                          value: 'value',
+                          value: f.format(value),
                           unit: label[index].unit.tr,
                         );
                       },
@@ -56,7 +65,7 @@ class BloodGlucoseView extends GetView {
 
                     // TODO : add result
                     ResultBoxView(
-                      title: 'title',
+                      title: 'result'.tr,
                       value: 'value',
                     ),
 

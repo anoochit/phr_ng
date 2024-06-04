@@ -63,7 +63,7 @@ class BloodPressureView extends GetView {
 
                   // TODO : add result
                   ResultBoxView(
-                    title: 'title',
+                    title: 'result'.tr,
                     value: 'value',
                   ),
 

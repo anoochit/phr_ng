@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../controllers/app_controller.dart';
 import 'stats_box_view.dart';
@@ -47,9 +48,20 @@ class BmiStatsView extends GetView<AppController> {
                         itemBuilder: (context, index) {
                           // TODO : insert value
                           final label = controller.listBMILabel;
+                          final item = controller.listBMI.last;
+                          final f = NumberFormat('##.0#');
+
+                          double? value = (index == 0)
+                              ? item.weight
+                              : (index == 1)
+                                  ? item.height
+                                  : (index == 2)
+                                      ? item.bmi
+                                      : null;
+
                           return StatsBoxView(
                             title: label[index].title.tr,
-                            value: 'value',
+                            value: f.format(value),
                             unit: label[index].unit.tr,
                           );
                         },

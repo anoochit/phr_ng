@@ -10,6 +10,8 @@ class Glucose {
 
   late int unit;
 
+  late double a1c;
+
   @enumerated
   MeasureAt measureAt = MeasureAt.fasting;
 

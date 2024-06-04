@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 import 'package:phr/app/widgets/views/graph_box_view.dart';
 import 'package:phr/app/widgets/views/result_box_view.dart';
 
@@ -44,10 +45,19 @@ class BmiView extends GetView {
                       itemBuilder: (context, index) {
                         // TODO : add value
                         final label = controller.listBMILabel;
+                        final item = controller.listBMI.last;
+                        final f = NumberFormat('##.0#');
+                        double? value = (index == 0)
+                            ? item.weight
+                            : (index == 1)
+                                ? item.height
+                                : (index == 2)
+                                    ? item.bmi
+                                    : null;
 
                         return StatsCardBoxView(
                           title: label[index].title.tr,
-                          value: 'value',
+                          value: f.format(value),
                           unit: label[index].unit.tr,
                         );
                       },
@@ -55,7 +65,7 @@ class BmiView extends GetView {
 
                     // TODO : add result
                     ResultBoxView(
-                      title: 'title',
+                      title: 'result'.tr,
                       value: 'value',
                     ),
 

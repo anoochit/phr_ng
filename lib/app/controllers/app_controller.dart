@@ -460,6 +460,7 @@ class AppController extends GetxController {
       // glucose
       db.writeTxn(() async {
         final unit = 80 + math.Random().nextInt(30);
+        final a1c = glucoseToA1C(unit: unit);
         final level = glucoseCalculation(
           measureAt: MeasureAt.fasting,
           unit: unit,
@@ -469,6 +470,7 @@ class AppController extends GetxController {
           ..timestamp = DateTime.now()
           ..measureAt = MeasureAt.fasting
           ..unit = unit
+          ..a1c = a1c
           ..status = level;
 
         await db.glucoses.put(data);

@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:intl/intl.dart';
 
 import '../../controllers/app_controller.dart';
 import 'stats_box_view.dart';
@@ -46,9 +47,17 @@ class GlucoseStatsView extends GetView<AppController> {
                         itemBuilder: (context, index) {
                           // TODO : insert value
                           final label = controller.listGlucoseLabel;
+                          final item = controller.listGlucose.last;
+                          final f = NumberFormat('##.0#');
+                          final value = (index == 0)
+                              ? item.unit
+                              : (index == 1)
+                                  ? item.a1c
+                                  : null;
+
                           return StatsBoxView(
                             title: label[index].title.tr,
-                            value: 'value',
+                            value: f.format(value),
                             unit: label[index].unit.tr,
                           );
                         },

@@ -51,6 +51,7 @@ class LocaleKeys {
   static const system = 'system';
   static const cancel = 'cancel';
   static const save = 'save';
+  static const result = 'result';
 }
 
 class Locales {
@@ -94,7 +95,8 @@ class Locales {
     'light': 'Light',
     'system': 'System',
     'cancel': 'Cancel',
-    'save': 'save',
+    'save': 'Save',
+    'result': 'Result',
   };
   static const th_TH = {
     'home': 'หน้าแรก',
@@ -137,5 +139,6 @@ class Locales {
     'system': 'ค่าระบบ',
     'cancel': 'ยกเลิก',
     'save': 'บันทึก',
+    'result': 'ผลลัพท์',
   };
 }

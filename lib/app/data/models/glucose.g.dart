@@ -17,25 +17,30 @@ const GlucoseSchema = CollectionSchema(
   name: r'Glucose',
   id: 343712322527678881,
   properties: {
-    r'measureAt': PropertySchema(
+    r'a1c': PropertySchema(
       id: 0,
+      name: r'a1c',
+      type: IsarType.double,
+    ),
+    r'measureAt': PropertySchema(
+      id: 1,
       name: r'measureAt',
       type: IsarType.byte,
       enumMap: _GlucosemeasureAtEnumValueMap,
     ),
     r'status': PropertySchema(
-      id: 1,
+      id: 2,
       name: r'status',
       type: IsarType.byte,
       enumMap: _GlucosestatusEnumValueMap,
     ),
     r'timestamp': PropertySchema(
-      id: 2,
+      id: 3,
       name: r'timestamp',
       type: IsarType.dateTime,
     ),
     r'unit': PropertySchema(
-      id: 3,
+      id: 4,
       name: r'unit',
       type: IsarType.long,
     )
@@ -83,10 +88,11 @@ void _glucoseSerialize(
   List<int> offsets,
   Map<Type, List<int>> allOffsets,
 ) {
-  writer.writeByte(offsets[0], object.measureAt.index);
-  writer.writeByte(offsets[1], object.status.index);
-  writer.writeDateTime(offsets[2], object.timestamp);
-  writer.writeLong(offsets[3], object.unit);
+  writer.writeDouble(offsets[0], object.a1c);
+  writer.writeByte(offsets[1], object.measureAt.index);
+  writer.writeByte(offsets[2], object.status.index);
+  writer.writeDateTime(offsets[3], object.timestamp);
+  writer.writeLong(offsets[4], object.unit);
 }
 
 Glucose _glucoseDeserialize(
@@ -96,15 +102,16 @@ Glucose _glucoseDeserialize(
   Map<Type, List<int>> allOffsets,
 ) {
   final object = Glucose();
+  object.a1c = reader.readDouble(offsets[0]);
   object.id = id;
   object.measureAt =
-      _GlucosemeasureAtValueEnumMap[reader.readByteOrNull(offsets[0])] ??
+      _GlucosemeasureAtValueEnumMap[reader.readByteOrNull(offsets[1])] ??
           MeasureAt.fasting;
   object.status =
-      _GlucosestatusValueEnumMap[reader.readByteOrNull(offsets[1])] ??
+      _GlucosestatusValueEnumMap[reader.readByteOrNull(offsets[2])] ??
           GlucoseStatus.normal;
-  object.timestamp = reader.readDateTime(offsets[2]);
-  object.unit = reader.readLong(offsets[3]);
+  object.timestamp = reader.readDateTime(offsets[3]);
+  object.unit = reader.readLong(offsets[4]);
   return object;
 }
 
@@ -116,14 +123,16 @@ P _glucoseDeserializeProp<P>(
 ) {
   switch (propertyId) {
     case 0:
+      return (reader.readDouble(offset)) as P;
+    case 1:
       return (_GlucosemeasureAtValueEnumMap[reader.readByteOrNull(offset)] ??
           MeasureAt.fasting) as P;
-    case 1:
+    case 2:
       return (_GlucosestatusValueEnumMap[reader.readByteOrNull(offset)] ??
           GlucoseStatus.normal) as P;
-    case 2:
-      return (reader.readDateTime(offset)) as P;
     case 3:
+      return (reader.readDateTime(offset)) as P;
+    case 4:
       return (reader.readLong(offset)) as P;
     default:
       throw IsarError('Unknown property with id $propertyId');
@@ -340,6 +349,68 @@ extension GlucoseQueryWhere on QueryBuilder<Glucose, Glucose, QWhereClause> {
 
 extension GlucoseQueryFilter
     on QueryBuilder<Glucose, Glucose, QFilterCondition> {
+  QueryBuilder<Glucose, Glucose, QAfterFilterCondition> a1cEqualTo(
+    double value, {
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.equalTo(
+        property: r'a1c',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Glucose, Glucose, QAfterFilterCondition> a1cGreaterThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.greaterThan(
+        include: include,
+        property: r'a1c',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Glucose, Glucose, QAfterFilterCondition> a1cLessThan(
+    double value, {
+    bool include = false,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.lessThan(
+        include: include,
+        property: r'a1c',
+        value: value,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
+  QueryBuilder<Glucose, Glucose, QAfterFilterCondition> a1cBetween(
+    double lower,
+    double upper, {
+    bool includeLower = true,
+    bool includeUpper = true,
+    double epsilon = Query.epsilon,
+  }) {
+    return QueryBuilder.apply(this, (query) {
+      return query.addFilterCondition(FilterCondition.between(
+        property: r'a1c',
+        lower: lower,
+        includeLower: includeLower,
+        upper: upper,
+        includeUpper: includeUpper,
+        epsilon: epsilon,
+      ));
+    });
+  }
+
   QueryBuilder<Glucose, Glucose, QAfterFilterCondition> idEqualTo(Id value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
@@ -611,6 +682,18 @@ extension GlucoseQueryLinks
     on QueryBuilder<Glucose, Glucose, QFilterCondition> {}
 
 extension GlucoseQuerySortBy on QueryBuilder<Glucose, Glucose, QSortBy> {
+  QueryBuilder<Glucose, Glucose, QAfterSortBy> sortByA1c() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'a1c', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Glucose, Glucose, QAfterSortBy> sortByA1cDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'a1c', Sort.desc);
+    });
+  }
+
   QueryBuilder<Glucose, Glucose, QAfterSortBy> sortByMeasureAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'measureAt', Sort.asc);
@@ -662,6 +745,18 @@ extension GlucoseQuerySortBy on QueryBuilder<Glucose, Glucose, QSortBy> {
 
 extension GlucoseQuerySortThenBy
     on QueryBuilder<Glucose, Glucose, QSortThenBy> {
+  QueryBuilder<Glucose, Glucose, QAfterSortBy> thenByA1c() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'a1c', Sort.asc);
+    });
+  }
+
+  QueryBuilder<Glucose, Glucose, QAfterSortBy> thenByA1cDesc() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addSortBy(r'a1c', Sort.desc);
+    });
+  }
+
   QueryBuilder<Glucose, Glucose, QAfterSortBy> thenById() {
     return QueryBuilder.apply(this, (query) {
       return query.addSortBy(r'id', Sort.asc);
@@ -725,6 +820,12 @@ extension GlucoseQuerySortThenBy
 
 extension GlucoseQueryWhereDistinct
     on QueryBuilder<Glucose, Glucose, QDistinct> {
+  QueryBuilder<Glucose, Glucose, QDistinct> distinctByA1c() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addDistinctBy(r'a1c');
+    });
+  }
+
   QueryBuilder<Glucose, Glucose, QDistinct> distinctByMeasureAt() {
     return QueryBuilder.apply(this, (query) {
       return query.addDistinctBy(r'measureAt');
@@ -755,6 +856,12 @@ extension GlucoseQueryProperty
   QueryBuilder<Glucose, int, QQueryOperations> idProperty() {
     return QueryBuilder.apply(this, (query) {
       return query.addPropertyName(r'id');
+    });
+  }
+
+  QueryBuilder<Glucose, double, QQueryOperations> a1cProperty() {
+    return QueryBuilder.apply(this, (query) {
+      return query.addPropertyName(r'a1c');
     });
   }
 
