@@ -5,6 +5,7 @@ import 'package:get/get.dart';
 import '../../../controllers/app_controller.dart';
 import '../../../routes/app_pages.dart';
 import '../../../widgets/views/history_button_view.dart';
+import '../../../widgets/views/nodata_stats_view.dart';
 import '../../../widgets/views/stats_card_box_view.dart';
 
 class BmiView extends GetView {
@@ -27,35 +28,42 @@ class BmiView extends GetView {
       ),
       body: GetBuilder<AppController>(
         builder: (controller) {
-          return ListView(
-            children: [
-              // stats
-              GridView.builder(
-                itemCount: 3,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 3),
-                itemBuilder: (context, index) {
-                  // TODO : add value
-                  final label = controller.listBMILabel;
+          return (controller.listBMI.isNotEmpty)
+              ? ListView(
+                  children: [
+                    // stats
+                    GridView.builder(
+                      itemCount: 3,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                              crossAxisCount: 3),
+                      itemBuilder: (context, index) {
+                        // TODO : add value
+                        final label = controller.listBMILabel;
 
-                  return StatsCardBoxView(
-                    title: label[index].title.tr,
-                    value: 'value',
-                    unit: label[index].unit.tr,
-                  );
-                },
-              ),
+                        return StatsCardBoxView(
+                          title: label[index].title.tr,
+                          value: 'value',
+                          unit: label[index].unit.tr,
+                        );
+                      },
+                    ),
 
-              // TODO : add result
+                    // TODO : add result
 
-              // TODO : add graphs
+                    // TODO : add graphs
 
-              // TODO : add history button
-              HistoryButtonView(onTap: () {}),
-            ],
-          );
+                    // TODO : add history button
+                    HistoryButtonView(onTap: () {}),
+                  ],
+                )
+              : Container(
+                  child: NodataStatsView(
+                    title: 'no_data_blood_pressure'.tr,
+                  ),
+                );
         },
       ),
     );

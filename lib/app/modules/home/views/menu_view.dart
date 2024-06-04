@@ -28,9 +28,8 @@ class MenuView extends GetView<AppController> {
         final icon = menus[index].icon;
         final route = menus[index].route;
         return MenuItemView(
-          title: title.tr,
-          icon: icon,
-          onTap: () => (datas[index].isNotEmpty) ? Get.toNamed(route) : null,
+          title: title.tr, icon: icon, onTap: () => Get.toNamed(route),
+          // onTap: () => (datas[index].isNotEmpty) ? Get.toNamed(route) : null,
         );
       },
     );

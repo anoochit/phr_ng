@@ -281,8 +281,8 @@ class AppController extends GetxController {
     return bytes.toList();
   }
 
-  // save name
-  savePhoto({required XFile xfile}) async {
+  // save avatar
+  saveAvatar({required XFile xfile}) async {
     List<int> image = await convertXFileToList(xfile);
 
     // save setting storage

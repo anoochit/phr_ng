@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 
 import 'package:get/get.dart';
-import 'package:image_picker/image_picker.dart';
 
 import '../../../controllers/app_controller.dart';
 import '../../../data/models/profile.dart';
@@ -322,5 +321,5 @@ class SettingsView extends GetView {
 
   buildAvatarSetting(BuildContext context, AppController controller) async {
     // TODO : Change avatar image
-  }
+   }
 }

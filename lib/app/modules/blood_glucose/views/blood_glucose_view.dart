@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:phr/app/widgets/views/nodata_stats_view.dart';
 
 import '../../../controllers/app_controller.dart';
 import '../../../routes/app_pages.dart';
@@ -27,36 +28,43 @@ class BloodGlucoseView extends GetView {
       ),
       body: GetBuilder<AppController>(
         builder: (controller) {
-          return ListView(
-            children: [
-              // stats
-              GridView.builder(
-                itemCount: 2,
-                shrinkWrap: true,
-                physics: const NeverScrollableScrollPhysics(),
-                gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                  crossAxisCount: 2,
-                  childAspectRatio: 3 / 2,
-                ),
-                itemBuilder: (context, index) {
-                  // TODO : add value
-                  final label = controller.listGlucoseLabel;
-                  return StatsCardBoxView(
-                    title: label[index].title.tr,
-                    value: 'value',
-                    unit: label[index].unit.tr,
-                  );
-                },
-              ),
+          return (controller.listGlucose.isNotEmpty)
+              ? ListView(
+                  children: [
+                    // stats
+                    GridView.builder(
+                      itemCount: 2,
+                      shrinkWrap: true,
+                      physics: const NeverScrollableScrollPhysics(),
+                      gridDelegate:
+                          const SliverGridDelegateWithFixedCrossAxisCount(
+                        crossAxisCount: 2,
+                        childAspectRatio: 3 / 2,
+                      ),
+                      itemBuilder: (context, index) {
+                        // TODO : add value
+                        final label = controller.listGlucoseLabel;
+                        return StatsCardBoxView(
+                          title: label[index].title.tr,
+                          value: 'value',
+                          unit: label[index].unit.tr,
+                        );
+                      },
+                    ),
 
-              // TODO : add result
+                    // TODO : add result
 
-              // TODO : add graphs
+                    // TODO : add graphs
 
-              // TODO : add history button
-              HistoryButtonView(onTap: () {}),
-            ],
-          );
+                    // TODO : add history button
+                    HistoryButtonView(onTap: () {}),
+                  ],
+                )
+              : Container(
+                  child: NodataStatsView(
+                    title: 'no_data_blood_glucose'.tr,
+                  ),
+                );
         },
       ),
     );
