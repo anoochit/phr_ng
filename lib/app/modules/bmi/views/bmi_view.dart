@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:phr/app/widgets/views/graph_box_view.dart';
+import 'package:phr/app/widgets/views/result_box_view.dart';
 
 import '../../../controllers/app_controller.dart';
 import '../../../routes/app_pages.dart';
@@ -52,17 +54,20 @@ class BmiView extends GetView {
                     ),
 
                     // TODO : add result
+                    ResultBoxView(
+                      title: 'title',
+                      value: 'value',
+                    ),
 
                     // TODO : add graphs
+                    GraphBoxView(),
 
                     // TODO : add history button
                     HistoryButtonView(onTap: () {}),
                   ],
                 )
-              : Container(
-                  child: NodataStatsView(
-                    title: 'no_data_blood_pressure'.tr,
-                  ),
+              : NodataStatsView(
+                  title: 'no_data_blood_pressure'.tr,
                 );
         },
       ),

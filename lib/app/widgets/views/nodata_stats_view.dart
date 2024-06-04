@@ -13,11 +13,11 @@ class NodataStatsView extends GetView {
   Widget build(BuildContext context) {
     return Card(
       clipBehavior: Clip.antiAliasWithSaveLayer,
-      child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(16.0),
-          child: Text(title),
-        ),
+      child: Container(
+        width: MediaQuery.sizeOf(context).width,
+        alignment: Alignment.center,
+        padding: const EdgeInsets.all(16.0),
+        child: Text(title),
       ),
     );
   }

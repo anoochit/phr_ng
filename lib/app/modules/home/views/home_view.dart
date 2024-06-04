@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
+import 'package:phr/app/widgets/views/sample_button_view.dart';
 import '../../../routes/app_pages.dart';
 import '../../../widgets/views/bloodpressure_stats_view.dart';
 import '../../../widgets/views/bmi_stats_view.dart';
@@ -23,6 +24,7 @@ class HomeView extends GetView {
           const MenuView(),
 
           // TODO : show add sample data only in debug mode
+          SampleButtonView(),
 
           // bmi stats with graph
           BmiStatsView(

@@ -4,8 +4,10 @@ import 'package:get/get.dart';
 
 import '../../../controllers/app_controller.dart';
 import '../../../routes/app_pages.dart';
+import '../../../widgets/views/graph_box_view.dart';
 import '../../../widgets/views/history_button_view.dart';
 import '../../../widgets/views/nodata_stats_view.dart';
+import '../../../widgets/views/result_box_view.dart';
 import '../../../widgets/views/stats_card_box_view.dart';
 
 class BloodPressureView extends GetView {
@@ -60,8 +62,13 @@ class BloodPressureView extends GetView {
                   ),
 
                   // TODO : add result
+                  ResultBoxView(
+                    title: 'title',
+                    value: 'value',
+                  ),
 
                   // TODO : add graphs
+                  GraphBoxView(),
 
                   // TODO : add history button
                   HistoryButtonView(onTap: () {}),
