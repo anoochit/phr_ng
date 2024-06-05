@@ -45,6 +45,7 @@ class BloodPressureView extends GetView {
                       final label = controller.listBloodPressureLabel;
                       final item = controller.listBloodPressure.last;
 
+                      // FIXME : bug when null
                       int? value = (index == 0)
                           ? item.systolic
                           : (index == 1)

@@ -49,6 +49,8 @@ class BloodGlucoseView extends GetView {
                         final label = controller.listGlucoseLabel;
                         final item = controller.listGlucose.last;
                         final f = NumberFormat('##.0#');
+
+                        // FIXME : bug when null
                         final value = (index == 0)
                             ? item.unit
                             : (index == 1)

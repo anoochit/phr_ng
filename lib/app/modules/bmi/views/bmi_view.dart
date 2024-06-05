@@ -47,6 +47,8 @@ class BmiView extends GetView {
                         final label = controller.listBMILabel;
                         final item = controller.listBMI.last;
                         final f = NumberFormat('##.0#');
+
+                        // FIXME : bug when null
                         double? value = (index == 0)
                             ? item.weight
                             : (index == 1)
