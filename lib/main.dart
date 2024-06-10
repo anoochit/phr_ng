@@ -16,6 +16,7 @@ Future<void> main() async {
   await initDatabase();
   // load data
   await appController.loadData();
+
   // run app
   runApp(MyApp(controller: appController));
 }

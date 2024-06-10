@@ -6,7 +6,7 @@ part 'pressure.g.dart';
 class BloodPressure {
   Id id = Isar.autoIncrement;
   @Index()
-  late DateTime timpstamp;
+  late DateTime timestamp;
   late int systolic;
   late int diastolic;
   late int pulse;

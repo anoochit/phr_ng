@@ -73,7 +73,6 @@ class AppController extends GetxController {
 
   // load bmi data
   loadBMIData() {
-    listBMI.clear();
     db.bmis.where().findAll().then((value) {
       log('load bmi data');
       listBMI.value = value;
@@ -83,7 +82,6 @@ class AppController extends GetxController {
 
   // load glucose data
   loadGlucoseData() {
-    listGlucose.clear();
     db.glucoses.where().findAll().then((value) {
       log('load glucose data');
       listGlucose.value = value;
@@ -93,7 +91,6 @@ class AppController extends GetxController {
 
   // load blood presure data
   loadBloodPresureData() {
-    listBloodPressure.clear();
     db.bloodPressures.where().findAll().then((value) {
       log('load blood presure data');
       listBloodPressure.value = value;
@@ -448,7 +445,7 @@ class AppController extends GetxController {
         final level = bloodPressureCalculation(systolic: sys, diastolic: dia);
 
         final data = BloodPressure()
-          ..timpstamp = DateTime.now()
+          ..timestamp = DateTime.now()
           ..systolic = sys
           ..diastolic = dia
           ..pulse = pul

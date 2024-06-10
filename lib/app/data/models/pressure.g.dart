@@ -38,9 +38,9 @@ const BloodPressureSchema = CollectionSchema(
       name: r'systolic',
       type: IsarType.long,
     ),
-    r'timpstamp': PropertySchema(
+    r'timestamp': PropertySchema(
       id: 4,
-      name: r'timpstamp',
+      name: r'timestamp',
       type: IsarType.dateTime,
     )
   },
@@ -50,14 +50,14 @@ const BloodPressureSchema = CollectionSchema(
   deserializeProp: _bloodPressureDeserializeProp,
   idName: r'id',
   indexes: {
-    r'timpstamp': IndexSchema(
-      id: 7357102950955934196,
-      name: r'timpstamp',
+    r'timestamp': IndexSchema(
+      id: 1852253767416892198,
+      name: r'timestamp',
       unique: false,
       replace: false,
       properties: [
         IndexPropertySchema(
-          name: r'timpstamp',
+          name: r'timestamp',
           type: IndexType.value,
           caseSensitive: false,
         )
@@ -91,7 +91,7 @@ void _bloodPressureSerialize(
   writer.writeLong(offsets[1], object.pulse);
   writer.writeByte(offsets[2], object.status.index);
   writer.writeLong(offsets[3], object.systolic);
-  writer.writeDateTime(offsets[4], object.timpstamp);
+  writer.writeDateTime(offsets[4], object.timestamp);
 }
 
 BloodPressure _bloodPressureDeserialize(
@@ -108,7 +108,7 @@ BloodPressure _bloodPressureDeserialize(
       _BloodPressurestatusValueEnumMap[reader.readByteOrNull(offsets[2])] ??
           BloodPresureStatus.hypo;
   object.systolic = reader.readLong(offsets[3]);
-  object.timpstamp = reader.readDateTime(offsets[4]);
+  object.timestamp = reader.readDateTime(offsets[4]);
   return object;
 }
 
@@ -171,10 +171,10 @@ extension BloodPressureQueryWhereSort
     });
   }
 
-  QueryBuilder<BloodPressure, BloodPressure, QAfterWhere> anyTimpstamp() {
+  QueryBuilder<BloodPressure, BloodPressure, QAfterWhere> anyTimestamp() {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(
-        const IndexWhereClause.any(indexName: r'timpstamp'),
+        const IndexWhereClause.any(indexName: r'timestamp'),
       );
     });
   }
@@ -252,44 +252,44 @@ extension BloodPressureQueryWhere
   }
 
   QueryBuilder<BloodPressure, BloodPressure, QAfterWhereClause>
-      timpstampEqualTo(DateTime timpstamp) {
+      timestampEqualTo(DateTime timestamp) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.equalTo(
-        indexName: r'timpstamp',
-        value: [timpstamp],
+        indexName: r'timestamp',
+        value: [timestamp],
       ));
     });
   }
 
   QueryBuilder<BloodPressure, BloodPressure, QAfterWhereClause>
-      timpstampNotEqualTo(DateTime timpstamp) {
+      timestampNotEqualTo(DateTime timestamp) {
     return QueryBuilder.apply(this, (query) {
       if (query.whereSort == Sort.asc) {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'timpstamp',
+              indexName: r'timestamp',
               lower: [],
-              upper: [timpstamp],
+              upper: [timestamp],
               includeUpper: false,
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'timpstamp',
-              lower: [timpstamp],
+              indexName: r'timestamp',
+              lower: [timestamp],
               includeLower: false,
               upper: [],
             ));
       } else {
         return query
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'timpstamp',
-              lower: [timpstamp],
+              indexName: r'timestamp',
+              lower: [timestamp],
               includeLower: false,
               upper: [],
             ))
             .addWhereClause(IndexWhereClause.between(
-              indexName: r'timpstamp',
+              indexName: r'timestamp',
               lower: [],
-              upper: [timpstamp],
+              upper: [timestamp],
               includeUpper: false,
             ));
       }
@@ -297,14 +297,14 @@ extension BloodPressureQueryWhere
   }
 
   QueryBuilder<BloodPressure, BloodPressure, QAfterWhereClause>
-      timpstampGreaterThan(
-    DateTime timpstamp, {
+      timestampGreaterThan(
+    DateTime timestamp, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'timpstamp',
-        lower: [timpstamp],
+        indexName: r'timestamp',
+        lower: [timestamp],
         includeLower: include,
         upper: [],
       ));
@@ -312,33 +312,33 @@ extension BloodPressureQueryWhere
   }
 
   QueryBuilder<BloodPressure, BloodPressure, QAfterWhereClause>
-      timpstampLessThan(
-    DateTime timpstamp, {
+      timestampLessThan(
+    DateTime timestamp, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'timpstamp',
+        indexName: r'timestamp',
         lower: [],
-        upper: [timpstamp],
+        upper: [timestamp],
         includeUpper: include,
       ));
     });
   }
 
   QueryBuilder<BloodPressure, BloodPressure, QAfterWhereClause>
-      timpstampBetween(
-    DateTime lowerTimpstamp,
-    DateTime upperTimpstamp, {
+      timestampBetween(
+    DateTime lowerTimestamp,
+    DateTime upperTimestamp, {
     bool includeLower = true,
     bool includeUpper = true,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addWhereClause(IndexWhereClause.between(
-        indexName: r'timpstamp',
-        lower: [lowerTimpstamp],
+        indexName: r'timestamp',
+        lower: [lowerTimestamp],
         includeLower: includeLower,
-        upper: [upperTimpstamp],
+        upper: [upperTimestamp],
         includeUpper: includeUpper,
       ));
     });
@@ -626,45 +626,45 @@ extension BloodPressureQueryFilter
   }
 
   QueryBuilder<BloodPressure, BloodPressure, QAfterFilterCondition>
-      timpstampEqualTo(DateTime value) {
+      timestampEqualTo(DateTime value) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.equalTo(
-        property: r'timpstamp',
+        property: r'timestamp',
         value: value,
       ));
     });
   }
 
   QueryBuilder<BloodPressure, BloodPressure, QAfterFilterCondition>
-      timpstampGreaterThan(
+      timestampGreaterThan(
     DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.greaterThan(
         include: include,
-        property: r'timpstamp',
+        property: r'timestamp',
         value: value,
       ));
     });
   }
 
   QueryBuilder<BloodPressure, BloodPressure, QAfterFilterCondition>
-      timpstampLessThan(
+      timestampLessThan(
     DateTime value, {
     bool include = false,
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.lessThan(
         include: include,
-        property: r'timpstamp',
+        property: r'timestamp',
         value: value,
       ));
     });
   }
 
   QueryBuilder<BloodPressure, BloodPressure, QAfterFilterCondition>
-      timpstampBetween(
+      timestampBetween(
     DateTime lower,
     DateTime upper, {
     bool includeLower = true,
@@ -672,7 +672,7 @@ extension BloodPressureQueryFilter
   }) {
     return QueryBuilder.apply(this, (query) {
       return query.addFilterCondition(FilterCondition.between(
-        property: r'timpstamp',
+        property: r'timestamp',
         lower: lower,
         includeLower: includeLower,
         upper: upper,
@@ -740,16 +740,16 @@ extension BloodPressureQuerySortBy
     });
   }
 
-  QueryBuilder<BloodPressure, BloodPressure, QAfterSortBy> sortByTimpstamp() {
+  QueryBuilder<BloodPressure, BloodPressure, QAfterSortBy> sortByTimestamp() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'timpstamp', Sort.asc);
+      return query.addSortBy(r'timestamp', Sort.asc);
     });
   }
 
   QueryBuilder<BloodPressure, BloodPressure, QAfterSortBy>
-      sortByTimpstampDesc() {
+      sortByTimestampDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'timpstamp', Sort.desc);
+      return query.addSortBy(r'timestamp', Sort.desc);
     });
   }
 }
@@ -818,16 +818,16 @@ extension BloodPressureQuerySortThenBy
     });
   }
 
-  QueryBuilder<BloodPressure, BloodPressure, QAfterSortBy> thenByTimpstamp() {
+  QueryBuilder<BloodPressure, BloodPressure, QAfterSortBy> thenByTimestamp() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'timpstamp', Sort.asc);
+      return query.addSortBy(r'timestamp', Sort.asc);
     });
   }
 
   QueryBuilder<BloodPressure, BloodPressure, QAfterSortBy>
-      thenByTimpstampDesc() {
+      thenByTimestampDesc() {
     return QueryBuilder.apply(this, (query) {
-      return query.addSortBy(r'timpstamp', Sort.desc);
+      return query.addSortBy(r'timestamp', Sort.desc);
     });
   }
 }
@@ -858,9 +858,9 @@ extension BloodPressureQueryWhereDistinct
     });
   }
 
-  QueryBuilder<BloodPressure, BloodPressure, QDistinct> distinctByTimpstamp() {
+  QueryBuilder<BloodPressure, BloodPressure, QDistinct> distinctByTimestamp() {
     return QueryBuilder.apply(this, (query) {
-      return query.addDistinctBy(r'timpstamp');
+      return query.addDistinctBy(r'timestamp');
     });
   }
 }
@@ -898,9 +898,9 @@ extension BloodPressureQueryProperty
     });
   }
 
-  QueryBuilder<BloodPressure, DateTime, QQueryOperations> timpstampProperty() {
+  QueryBuilder<BloodPressure, DateTime, QQueryOperations> timestampProperty() {
     return QueryBuilder.apply(this, (query) {
-      return query.addPropertyName(r'timpstamp');
+      return query.addPropertyName(r'timestamp');
     });
   }
 }
