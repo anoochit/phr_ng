@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import '../../../controllers/app_controller.dart';
+import '../../../data/models/chart_data.dart';
 import '../../../routes/app_pages.dart';
 import '../../../widgets/views/graph_box_view.dart';
 import '../../../widgets/views/history_button_view.dart';
@@ -50,9 +51,7 @@ class BloodPressureView extends GetView {
                           ? item.systolic
                           : (index == 1)
                               ? item.diastolic
-                              : (index == 2)
-                                  ? item.pulse
-                                  : null;
+                              : item.pulse;
 
                       return StatsCardBoxView(
                         title: label[index].title.tr,
@@ -65,14 +64,22 @@ class BloodPressureView extends GetView {
                   // TODO : add result
                   ResultBoxView(
                     title: 'result'.tr,
-                    value: 'value',
+                    value: controller.listBloodPressure.last.status.name.tr,
                   ),
 
                   // TODO : add graphs
-                  GraphBoxView(),
+                  GraphBoxView(
+                    title: 'statistic'.tr,
+                    data: DataSource.bloodPressure,
+                  ),
 
                   // TODO : add history button
-                  HistoryButtonView(onTap: () {}),
+                  HistoryButtonView(
+                    onTap: () => Get.toNamed(
+                      Routes.HISTORY,
+                      arguments: DataSource.bloodPressure,
+                    ),
+                  ),
                 ],
               )
             : Container(

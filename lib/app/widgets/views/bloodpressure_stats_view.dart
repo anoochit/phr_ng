@@ -49,9 +49,7 @@ class BloodpressureStatsView extends GetView<AppController> {
                               ? item.systolic
                               : (index == 1)
                                   ? item.diastolic
-                                  : (index == 2)
-                                      ? item.pulse
-                                      : null;
+                                  : item.pulse;
 
                           return StatsBoxView(
                             title: label[index].title.tr,

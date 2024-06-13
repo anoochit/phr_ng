@@ -62,6 +62,13 @@ class HomeView extends GetView {
               // open share
               Get.toNamed(Routes.SHARE);
             },
+          ),
+          PopupMenuItem(
+            child: Text('ask_ai'.tr),
+            onTap: () {
+              // open share
+              Get.toNamed(Routes.ASKAI);
+            },
           )
         ],
       )

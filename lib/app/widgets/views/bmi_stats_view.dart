@@ -56,9 +56,7 @@ class BmiStatsView extends GetView<AppController> {
                               ? item.weight
                               : (index == 1)
                                   ? item.height
-                                  : (index == 2)
-                                      ? item.bmi
-                                      : null;
+                                  : item.bmi;
 
                           return StatsBoxView(
                             title: label[index].title.tr,

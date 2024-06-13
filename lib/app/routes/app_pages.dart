@@ -6,12 +6,16 @@ import '../modules/add_blood_pressure/bindings/add_blood_pressure_binding.dart';
 import '../modules/add_blood_pressure/views/add_blood_pressure_view.dart';
 import '../modules/add_bmi/bindings/add_bmi_binding.dart';
 import '../modules/add_bmi/views/add_bmi_view.dart';
+import '../modules/askai/bindings/askai_binding.dart';
+import '../modules/askai/views/askai_view.dart';
 import '../modules/blood_glucose/bindings/blood_glucose_binding.dart';
 import '../modules/blood_glucose/views/blood_glucose_view.dart';
 import '../modules/blood_pressure/bindings/blood_pressure_binding.dart';
 import '../modules/blood_pressure/views/blood_pressure_view.dart';
 import '../modules/bmi/bindings/bmi_binding.dart';
 import '../modules/bmi/views/bmi_view.dart';
+import '../modules/history/bindings/history_binding.dart';
+import '../modules/history/views/history_view.dart';
 import '../modules/home/bindings/home_binding.dart';
 import '../modules/home/views/home_view.dart';
 import '../modules/settings/bindings/settings_binding.dart';
@@ -82,6 +86,16 @@ class AppPages {
       page: () => const ShareView(),
       binding: ShareBinding(),
       transition: Transition.cupertino,
+    ),
+    GetPage(
+      name: _Paths.HISTORY,
+      page: () => const HistoryView(),
+      binding: HistoryBinding(),
+    ),
+    GetPage(
+      name: _Paths.ASKAI,
+      page: () => const AskaiView(),
+      binding: AskaiBinding(),
     ),
   ];
 }

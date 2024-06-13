@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 import 'package:get/get.dart';
 import 'package:intl/intl.dart';
+import 'package:phr/app/data/models/chart_data.dart';
 import 'package:phr/app/widgets/views/graph_box_view.dart';
 import 'package:phr/app/widgets/views/result_box_view.dart';
 
@@ -53,9 +54,7 @@ class BmiView extends GetView {
                             ? item.weight
                             : (index == 1)
                                 ? item.height
-                                : (index == 2)
-                                    ? item.bmi
-                                    : null;
+                                : item.bmi;
 
                         return StatsCardBoxView(
                           title: label[index].title.tr,
@@ -68,14 +67,22 @@ class BmiView extends GetView {
                     // TODO : add result
                     ResultBoxView(
                       title: 'result'.tr,
-                      value: 'value',
+                      value: controller.listBMI.last.status.name.tr,
                     ),
 
                     // TODO : add graphs
-                    GraphBoxView(),
+                    GraphBoxView(
+                      title: 'statistic'.tr,
+                      data: DataSource.bmi,
+                    ),
 
                     // TODO : add history button
-                    HistoryButtonView(onTap: () {}),
+                    HistoryButtonView(
+                      onTap: () => Get.toNamed(
+                        Routes.HISTORY,
+                        arguments: DataSource.bmi,
+                      ),
+                    ),
                   ],
                 )
               : NodataStatsView(

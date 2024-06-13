@@ -69,6 +69,25 @@ class AppController extends GetxController {
     loadBMIData();
     loadBloodPresureData();
     loadGlucoseData();
+    // TODO : data stream listen
+    streamListening();
+  }
+
+  streamListening() {
+    db.bmis.where().watch().listen((data) {
+      listBMI.value = data;
+      update();
+    });
+
+    db.bloodPressures.where().watch().listen((data) {
+      listBloodPressure.value = data;
+      update();
+    });
+
+    db.glucoses.where().watch().listen((data) {
+      listGlucose.value = data;
+      update();
+    });
   }
 
   // load bmi data
@@ -473,5 +492,23 @@ class AppController extends GetxController {
         await db.glucoses.put(data);
       });
     }
+  }
+
+  void deleteBmi({required Id id}) {
+    db.writeTxn(() async {
+      await db.bmis.delete(id);
+    });
+  }
+
+  void deleteGlucose({required Id id}) {
+    db.writeTxn(() async {
+      await db.glucoses.delete(id);
+    });
+  }
+
+  void deleteBloodPressure({required Id id}) {
+    db.writeTxn(() async {
+      await db.bloodPressures.delete(id);
+    });
   }
 }

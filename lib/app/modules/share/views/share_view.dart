@@ -53,17 +53,11 @@ class ShareView extends GetView {
                 // bmi stats
                 const BmiStatsView(),
 
-                const Gap(8.0),
-
                 // blood pressure stats
                 const BloodpressureStatsView(),
 
-                const Gap(8.0),
-
                 // blood glucose stats
                 const GlucoseStatsView(),
-
-                const Gap(8.0),
               ],
             ),
           );

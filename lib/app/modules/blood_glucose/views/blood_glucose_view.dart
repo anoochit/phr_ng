@@ -5,6 +5,7 @@ import 'package:intl/intl.dart';
 import 'package:phr/app/widgets/views/nodata_stats_view.dart';
 
 import '../../../controllers/app_controller.dart';
+import '../../../data/models/chart_data.dart';
 import '../../../routes/app_pages.dart';
 import '../../../widgets/views/graph_box_view.dart';
 import '../../../widgets/views/history_button_view.dart';
@@ -51,11 +52,7 @@ class BloodGlucoseView extends GetView {
                         final f = NumberFormat('##.0#');
 
                         // FIXME : bug when null
-                        final value = (index == 0)
-                            ? item.unit
-                            : (index == 1)
-                                ? item.a1c
-                                : null;
+                        final value = (index == 0) ? item.unit : item.a1c;
 
                         return StatsCardBoxView(
                           title: label[index].title.tr,
@@ -68,14 +65,22 @@ class BloodGlucoseView extends GetView {
                     // TODO : add result
                     ResultBoxView(
                       title: 'result'.tr,
-                      value: 'value',
+                      value: controller.listGlucose.last.status.name.tr,
                     ),
 
                     // TODO : add graphs
-                    GraphBoxView(),
+                    GraphBoxView(
+                      title: 'statistic'.tr,
+                      data: DataSource.bloodGlucose,
+                    ),
 
                     // TODO : add history button
-                    HistoryButtonView(onTap: () {}),
+                    HistoryButtonView(
+                      onTap: () => Get.toNamed(
+                        Routes.HISTORY,
+                        arguments: DataSource.bloodGlucose,
+                      ),
+                    ),
                   ],
                 )
               : Container(

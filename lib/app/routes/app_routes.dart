@@ -14,6 +14,8 @@ abstract class Routes {
   static const ADD_BLOOD_PRESSURE = _Paths.ADD_BLOOD_PRESSURE;
   static const ADD_BLOOD_GLUCOSE = _Paths.ADD_BLOOD_GLUCOSE;
   static const SHARE = _Paths.SHARE;
+  static const HISTORY = _Paths.HISTORY;
+  static const ASKAI = _Paths.ASKAI;
 }
 
 abstract class _Paths {
@@ -27,4 +29,6 @@ abstract class _Paths {
   static const ADD_BLOOD_PRESSURE = '/add-blood-pressure';
   static const ADD_BLOOD_GLUCOSE = '/add-blood-glucose';
   static const SHARE = '/share';
+  static const HISTORY = '/history';
+  static const ASKAI = '/askai';
 }

@@ -51,11 +51,7 @@ class GlucoseStatsView extends GetView<AppController> {
                           final f = NumberFormat('##.0#');
 
                           // FIXME : bug when null
-                          final value = (index == 0)
-                              ? item.unit
-                              : (index == 1)
-                                  ? item.a1c
-                                  : null;
+                          final value = (index == 0) ? item.unit : item.a1c;
 
                           return StatsBoxView(
                             title: label[index].title.tr,
