@@ -42,11 +42,10 @@ class BloodPressureView extends GetView {
                         const SliverGridDelegateWithFixedCrossAxisCount(
                             crossAxisCount: 3),
                     itemBuilder: (context, index) {
-                      // TODO : add value
+                      //  add value
                       final label = controller.listBloodPressureLabel;
                       final item = controller.listBloodPressure.last;
 
-                      // FIXME : bug when null
                       int? value = (index == 0)
                           ? item.systolic
                           : (index == 1)
@@ -61,19 +60,19 @@ class BloodPressureView extends GetView {
                     },
                   ),
 
-                  // TODO : add result
+                  // add result
                   ResultBoxView(
                     title: 'result'.tr,
                     value: controller.listBloodPressure.last.status.name.tr,
                   ),
 
-                  // TODO : add graphs
+                  // add graphs
                   GraphBoxView(
                     title: 'statistic'.tr,
                     data: DataSource.bloodPressure,
                   ),
 
-                  // TODO : add history button
+                  // add history button
                   HistoryButtonView(
                     onTap: () => Get.toNamed(
                       Routes.HISTORY,
@@ -82,10 +81,8 @@ class BloodPressureView extends GetView {
                   ),
                 ],
               )
-            : Container(
-                child: NodataStatsView(
-                  title: 'no_data_blood_pressure'.tr,
-                ),
+            : NodataStatsView(
+                title: 'no_data_blood_pressure'.tr,
               );
       }),
     );

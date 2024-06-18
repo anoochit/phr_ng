@@ -29,9 +29,15 @@ class GlucoseStatsView extends GetView<AppController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // title
-                      Text(
-                        "blood_glucose".tr,
-                        style: Theme.of(context).textTheme.labelLarge,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            "blood_glucose".tr,
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          Text(controller.listGlucose.last.status.name.tr)
+                        ],
                       ),
 
                       // stats
@@ -45,12 +51,11 @@ class GlucoseStatsView extends GetView<AppController> {
                           childAspectRatio: 3 / 2,
                         ),
                         itemBuilder: (context, index) {
-                          // TODO : insert value
+                          //  insert value
                           final label = controller.listGlucoseLabel;
                           final item = controller.listGlucose.last;
                           final f = NumberFormat('##.0#');
 
-                          // FIXME : bug when null
                           final value = (index == 0) ? item.unit : item.a1c;
 
                           return StatsBoxView(
@@ -60,8 +65,6 @@ class GlucoseStatsView extends GetView<AppController> {
                           );
                         },
                       ),
-
-                      // TODO : graph
                     ],
                   ),
                 ),

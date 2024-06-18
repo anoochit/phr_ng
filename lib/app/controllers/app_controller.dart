@@ -74,7 +74,7 @@ class AppController extends GetxController {
     loadBMIData();
     loadBloodPresureData();
     loadGlucoseData();
-    // TODO : data stream listen
+    // data stream listen
     streamListening();
   }
 

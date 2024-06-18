@@ -144,7 +144,7 @@ class SettingsView extends GetView {
     AppController controller,
     String name,
   ) {
-    //  TODO : setting display name
+    // setting display name
     showDialog(
       context: context,
       builder: (context) {
@@ -321,7 +321,7 @@ class SettingsView extends GetView {
   }
 
   buildAvatarSetting(BuildContext context, AppController controller) async {
-    // TODO : Change avatar image
+    // Change avatar image
     XFile? image = await ImagePicker().pickImage(source: ImageSource.gallery);
     if (image != null) {
       controller.saveAvatar(xfile: image);

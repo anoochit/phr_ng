@@ -91,11 +91,13 @@ class AppPages {
       name: _Paths.HISTORY,
       page: () => const HistoryView(),
       binding: HistoryBinding(),
+      transition: Transition.cupertino,
     ),
     GetPage(
       name: _Paths.ASKAI,
       page: () => const AskaiView(),
       binding: AskaiBinding(),
+      transition: Transition.cupertino,
     ),
   ];
 }

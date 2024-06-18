@@ -46,12 +46,11 @@ class BloodGlucoseView extends GetView {
                         childAspectRatio: 3 / 2,
                       ),
                       itemBuilder: (context, index) {
-                        // TODO : add value
+                        // add value
                         final label = controller.listGlucoseLabel;
                         final item = controller.listGlucose.last;
                         final f = NumberFormat('##.0#');
 
-                        // FIXME : bug when null
                         final value = (index == 0) ? item.unit : item.a1c;
 
                         return StatsCardBoxView(
@@ -62,19 +61,19 @@ class BloodGlucoseView extends GetView {
                       },
                     ),
 
-                    // TODO : add result
+                    // add result
                     ResultBoxView(
                       title: 'result'.tr,
                       value: controller.listGlucose.last.status.name.tr,
                     ),
 
-                    // TODO : add graphs
+                    // add graphs
                     GraphBoxView(
                       title: 'statistic'.tr,
                       data: DataSource.bloodGlucose,
                     ),
 
-                    // TODO : add history button
+                    // add history button
                     HistoryButtonView(
                       onTap: () => Get.toNamed(
                         Routes.HISTORY,
@@ -83,10 +82,8 @@ class BloodGlucoseView extends GetView {
                     ),
                   ],
                 )
-              : Container(
-                  child: NodataStatsView(
-                    title: 'no_data_blood_glucose'.tr,
-                  ),
+              : NodataStatsView(
+                  title: 'no_data_blood_glucose'.tr,
                 );
         },
       ),

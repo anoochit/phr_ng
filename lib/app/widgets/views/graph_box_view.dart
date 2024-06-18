@@ -14,7 +14,7 @@ class GraphBoxView extends GetView<AppController> {
 
   @override
   Widget build(BuildContext context) {
-    // TODO : show graph according to data
+    // show graph according to data
     List<List<ChartData>> chartData = [];
     List<ChartData> chartData1 = [];
     List<ChartData> chartData2 = [];
@@ -100,7 +100,7 @@ class GraphBoxView extends GetView<AppController> {
                     .format(DateTime.parse(axisLabelRenderArgs.text)),
                 null),
           ),
-          primaryYAxis: NumericAxis(),
+          primaryYAxis: const NumericAxis(),
           series: List.generate(chartData.length, (index) {
             final data = chartData[index].toList();
             return LineSeries<ChartData, dynamic>(

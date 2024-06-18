@@ -86,7 +86,7 @@ class ShareView extends GetView {
         onPressed: () async {
           // share
           final image = await screenshotController.capture(
-            delay: Duration(milliseconds: 200),
+            delay: const Duration(milliseconds: 200),
           );
 
           if (image != null) {
@@ -100,7 +100,7 @@ class ShareView extends GetView {
             );
           }
         },
-        icon: Icon(Icons.share),
+        icon: const Icon(Icons.share),
       ),
     ];
   }

@@ -31,9 +31,15 @@ class BmiStatsView extends GetView<AppController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // title
-                      Text(
-                        'body_mass_index'.tr,
-                        style: Theme.of(context).textTheme.labelLarge,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'body_mass_index'.tr,
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          Text(controller.listBMI.last.status.name.tr)
+                        ],
                       ),
 
                       // stats
@@ -46,12 +52,12 @@ class BmiStatsView extends GetView<AppController> {
                           crossAxisCount: 3,
                         ),
                         itemBuilder: (context, index) {
-                          // TODO : insert value
+                          // insert value
                           final label = controller.listBMILabel;
                           final item = controller.listBMI.last;
                           final f = NumberFormat('##.0#');
 
-                          // FIXME : bug when null
+                          // bug when null
                           double? value = (index == 0)
                               ? item.weight
                               : (index == 1)
@@ -65,8 +71,6 @@ class BmiStatsView extends GetView<AppController> {
                           );
                         },
                       ),
-
-                      // TODO : graph
                     ],
                   ),
                 ),

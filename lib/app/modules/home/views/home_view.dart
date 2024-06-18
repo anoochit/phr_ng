@@ -23,8 +23,8 @@ class HomeView extends GetView {
           // menu
           const MenuView(),
 
-          // TODO : show add sample data only in debug mode
-          SampleButtonView(),
+          // show add sample data only in debug mode
+          const SampleButtonView(),
 
           // bmi stats with graph
           BmiStatsView(

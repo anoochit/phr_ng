@@ -25,9 +25,15 @@ class BloodpressureStatsView extends GetView<AppController> {
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
                       // title
-                      Text(
-                        'blood_pressure'.tr,
-                        style: Theme.of(context).textTheme.labelLarge,
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Text(
+                            'blood_pressure'.tr,
+                            style: Theme.of(context).textTheme.labelLarge,
+                          ),
+                          Text(controller.listBloodPressure.last.status.name.tr)
+                        ],
                       ),
 
                       // stats
@@ -40,11 +46,11 @@ class BloodpressureStatsView extends GetView<AppController> {
                           crossAxisCount: 3,
                         ),
                         itemBuilder: (context, index) {
-                          // TODO : insert value
+                          // insert value
                           final label = controller.listBloodPressureLabel;
                           final item = controller.listBloodPressure.last;
 
-                          // FIXME : bug when null
+                          // bug when null
                           int? value = (index == 0)
                               ? item.systolic
                               : (index == 1)
@@ -58,8 +64,6 @@ class BloodpressureStatsView extends GetView<AppController> {
                           );
                         },
                       ),
-
-                      // TODO : graph
                     ],
                   ),
                 ),

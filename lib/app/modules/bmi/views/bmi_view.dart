@@ -44,12 +44,12 @@ class BmiView extends GetView {
                           const SliverGridDelegateWithFixedCrossAxisCount(
                               crossAxisCount: 3),
                       itemBuilder: (context, index) {
-                        // TODO : add value
+                        // add value
                         final label = controller.listBMILabel;
                         final item = controller.listBMI.last;
                         final f = NumberFormat('##.0#');
 
-                        // FIXME : bug when null
+                        // bug when null
                         double? value = (index == 0)
                             ? item.weight
                             : (index == 1)
@@ -64,19 +64,19 @@ class BmiView extends GetView {
                       },
                     ),
 
-                    // TODO : add result
+                    // add result
                     ResultBoxView(
                       title: 'result'.tr,
                       value: controller.listBMI.last.status.name.tr,
                     ),
 
-                    // TODO : add graphs
+                    // add graphs
                     GraphBoxView(
                       title: 'statistic'.tr,
                       data: DataSource.bmi,
                     ),
 
-                    // TODO : add history button
+                    // add history button
                     HistoryButtonView(
                       onTap: () => Get.toNamed(
                         Routes.HISTORY,

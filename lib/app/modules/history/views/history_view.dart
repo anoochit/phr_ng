@@ -13,7 +13,7 @@ import '../../../data/models/bmi.dart';
 import '../controllers/history_controller.dart';
 
 class HistoryView extends GetView<HistoryController> {
-  const HistoryView({Key? key}) : super(key: key);
+  const HistoryView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -67,13 +67,13 @@ class HistoryView extends GetView<HistoryController> {
                             Text('bmi'.tr),
                             // value
                             Text(
-                              '${bmi}',
+                              bmi,
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                           ],
                         ),
                       ),
-                      Gap(16.0),
+                      const Gap(16.0),
                       // status
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -90,13 +90,13 @@ class HistoryView extends GetView<HistoryController> {
                       ),
 
                       // button
-                      Spacer(),
+                      const Spacer(),
                       IconButton(
                         onPressed: () {
                           // delete bmi record
                           controller.deleteBmi(id: id);
                         },
-                        icon: Icon(FontAwesomeIcons.circleMinus),
+                        icon: const Icon(FontAwesomeIcons.circleMinus),
                       )
                     ],
                   ),
@@ -126,7 +126,7 @@ class HistoryView extends GetView<HistoryController> {
                           children: [
                             // sys
                             Text(
-                              '${sys}',
+                              '$sys',
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                             Padding(
@@ -143,13 +143,13 @@ class HistoryView extends GetView<HistoryController> {
                             ),
                             // dai
                             Text(
-                              '${dia}',
+                              '$dia',
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
                           ],
                         ),
                       ),
-                      Gap(16.0),
+                      const Gap(16.0),
                       // status
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -166,13 +166,13 @@ class HistoryView extends GetView<HistoryController> {
                       ),
 
                       // button
-                      Spacer(),
+                      const Spacer(),
                       IconButton(
                         onPressed: () {
                           // delete blood pressure record
                           controller.deleteBloodPressure(id: id);
                         },
-                        icon: Icon(FontAwesomeIcons.circleMinus),
+                        icon: const Icon(FontAwesomeIcons.circleMinus),
                       )
                     ],
                   ),
@@ -201,7 +201,7 @@ class HistoryView extends GetView<HistoryController> {
                           children: [
                             // unit
                             Text(
-                              '${unit}',
+                              '$unit',
                               style: Theme.of(context).textTheme.headlineSmall,
                             ),
 
@@ -209,7 +209,7 @@ class HistoryView extends GetView<HistoryController> {
                           ],
                         ),
                       ),
-                      Gap(16.0),
+                      const Gap(16.0),
                       // status
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
@@ -226,13 +226,13 @@ class HistoryView extends GetView<HistoryController> {
                       ),
 
                       // button
-                      Spacer(),
+                      const Spacer(),
                       IconButton(
                         onPressed: () {
                           // delete glucose record
                           controller.deleteGlucose(id: id);
                         },
-                        icon: Icon(FontAwesomeIcons.circleMinus),
+                        icon: const Icon(FontAwesomeIcons.circleMinus),
                       )
                     ],
                   ),
