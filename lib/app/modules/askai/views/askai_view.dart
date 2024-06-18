@@ -5,7 +5,7 @@ import 'package:get/get.dart';
 import '../controllers/askai_controller.dart';
 
 class AskaiView extends GetView<AskaiController> {
-  const AskaiView({Key? key}) : super(key: key);
+  const AskaiView({super.key});
   @override
   Widget build(BuildContext context) {
     return Scaffold(

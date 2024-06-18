@@ -240,7 +240,7 @@ class SettingsView extends GetView {
             TextButton(
               onPressed: () {
                 controller.saveAge(
-                  age: int.parse(textEditingController.text),
+                  age: int.tryParse(textEditingController.text) ?? 25,
                 );
                 Get.back();
               },
