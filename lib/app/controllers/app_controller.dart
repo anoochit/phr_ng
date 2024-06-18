@@ -6,6 +6,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:get/get.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:isar/isar.dart';
+import 'package:package_info_plus/package_info_plus.dart';
 import 'package:phr/app/data/models/setting.dart';
 import 'package:phr/app/data/models/stats_label.dart';
 
@@ -60,6 +61,10 @@ class AppController extends GetxController {
   late Setting setting;
 
   late Isar db;
+
+  MeasureAt measureAt = MeasureAt.fasting;
+
+  String versionNumber = '';
 
   loadData() async {
     // load setting data
@@ -530,5 +535,48 @@ class AppController extends GetxController {
 
       await db.bmis.put(data);
     });
+  }
+
+  // add blood pressure
+  void addBloodPressure(
+      {required DateTime timestamp,
+      required int sys,
+      required int dia,
+      required int pul}) {
+    final status = bloodPressureCalculation(systolic: sys, diastolic: dia);
+
+    db.writeTxn(() async {
+      final data = BloodPressure()
+        ..timestamp = timestamp
+        ..systolic = sys
+        ..diastolic = dia
+        ..pulse = pul
+        ..status = status;
+      await db.bloodPressures.put(data);
+    });
+  }
+
+  // add blood glucose
+  void addBloodGlucose(
+      {required DateTime timestamp,
+      required int glucose,
+      required MeasureAt meadureAt}) {
+    final status = glucoseCalculation(measureAt: measureAt, unit: glucose);
+    final a1c = glucoseToA1C(unit: glucose);
+
+    db.writeTxn(() async {
+      final data = Glucose()
+        ..timestamp = timestamp
+        ..measureAt = meadureAt
+        ..unit = glucose
+        ..a1c = a1c
+        ..status = status;
+      await db.glucoses.put(data);
+    });
+  }
+
+  Future<void> loadPackageInfo() async {
+    PackageInfo packageInfo = await PackageInfo.fromPlatform();
+    versionNumber = '${packageInfo.version}+${packageInfo.buildNumber}';
   }
 }
