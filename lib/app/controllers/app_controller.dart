@@ -511,4 +511,24 @@ class AppController extends GetxController {
       await db.bloodPressures.delete(id);
     });
   }
+
+  // add bmi
+  void addBmi(
+      {required DateTime timestamp,
+      required double weight,
+      required double height}) {
+    db.writeTxn(() async {
+      final bmi = bmiCalculation(weight: weight, height: height);
+      final status = bmiLevel(bmi: bmi);
+
+      final data = Bmi()
+        ..timestamp = timestamp
+        ..weight = weight
+        ..height = height
+        ..bmi = bmi
+        ..status = status;
+
+      await db.bmis.put(data);
+    });
+  }
 }

@@ -39,5 +39,12 @@
   "system": "ค่าระบบ",
   "cancel": "ยกเลิก",
   "save": "บันทึก",
-  "result": "ผลลัพท์"
+  "result": "ผลลัพท์",
+  "add_bmi": "เพิ่มข้อมูลดัชนีมวลกาย",
+  "select_date": "เลือกวัน",
+  "select_time": "เลือกเวลา",
+  "enter_weight_kg": "น้ำหนัก (กก.)",
+  "enter_height_cm": "ส่วนสูง (ซม.)",
+  "error": "ผิดพลาด",
+  "please_enter_weight_height": "กรุณากรอกข้อมูลน้ำหนักและส่วนสูง"
 }

@@ -83,7 +83,7 @@ class AppPages {
     ),
     GetPage(
       name: _Paths.SHARE,
-      page: () => const ShareView(),
+      page: () => ShareView(),
       binding: ShareBinding(),
       transition: Transition.cupertino,
     ),

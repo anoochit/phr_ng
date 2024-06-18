@@ -39,5 +39,12 @@
   "system": "System",
   "cancel": "Cancel",
   "save": "Save",
-  "result": "Result"
+  "result": "Result",
+  "add_bmi": "Add BMI",
+  "select_date": "Select date",
+  "select_time": "Select time",
+  "enter_weight_kg": "Enter weight (kg.)",
+  "enter_height_cm": "Enter height (cm.)",
+  "error": "Error",
+  "please_enter_weight_height": "Please enter weight and height"
 }

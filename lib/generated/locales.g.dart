@@ -52,6 +52,13 @@ class LocaleKeys {
   static const cancel = 'cancel';
   static const save = 'save';
   static const result = 'result';
+  static const add_bmi = 'add_bmi';
+  static const select_date = 'select_date';
+  static const select_time = 'select_time';
+  static const enter_weight_kg = 'enter_weight_kg';
+  static const enter_height_cm = 'enter_height_cm';
+  static const error = 'error';
+  static const please_enter_weight_height = 'please_enter_weight_height';
 }
 
 class Locales {
@@ -97,6 +104,13 @@ class Locales {
     'cancel': 'Cancel',
     'save': 'Save',
     'result': 'Result',
+    'add_bmi': 'Add BMI',
+    'select_date': 'Select date',
+    'select_time': 'Select time',
+    'enter_weight_kg': 'Enter weight (kg.)',
+    'enter_height_cm': 'Enter height (cm.)',
+    'error': 'Error',
+    'please_enter_weight_height': 'Please enter weight and height',
   };
   static const th_TH = {
     'home': 'หน้าแรก',
@@ -140,5 +154,12 @@ class Locales {
     'cancel': 'ยกเลิก',
     'save': 'บันทึก',
     'result': 'ผลลัพท์',
+    'add_bmi': 'เพิ่มข้อมูลดัชนีมวลกาย',
+    'select_date': 'เลือกวัน',
+    'select_time': 'เลือกเวลา',
+    'enter_weight_kg': 'น้ำหนัก (กก.)',
+    'enter_height_cm': 'ส่วนสูง (ซม.)',
+    'error': 'ผิดพลาด',
+    'please_enter_weight_height': 'กรุณากรอกข้อมูลน้ำหนักและส่วนสูง',
   };
 }
