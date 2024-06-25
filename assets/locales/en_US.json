@@ -75,11 +75,11 @@
   "type_your_message_here": "Typr your message here...",
   "choose_menu_ask_question": "Choose menu below or ask question",
   "processing": "Loading",
-  "health_info": "my health information",
-  "meal": "Recommended food",
-  "meal_prompt": "Recommend a 1-day meal plan for",
-  "weight_lost_plan": "Recommended exercises",
-  "weight_lost_plan_prompt": "Recommended exercises for a 1-day",
+  "health_info": "According to my health information: @context .",
+  "meal": "Recommend food",
+  "meal_prompt": "Recommend 1-day meal plan.",
+  "weight_lost_plan": "Recommend exercises",
+  "weight_lost_plan_prompt": "Recommend 1-day exercise plan.",
   "result_format": "Display results as a list.",
   "version": "Version"
 }
