@@ -10,6 +10,7 @@ dependencies:
   dynamic_color: ^1.7.0
   flutter:
     sdk: flutter
+  flutter_markdown: ^0.7.2+1
   font_awesome_flutter: ^10.7.0
   gap: ^3.0.1
   get: 4.6.6
@@ -26,6 +27,7 @@ dependencies:
   screenshot: ^3.0.0
   share_plus: ^9.0.0
   syncfusion_flutter_charts: ^25.2.6
+  web_socket_channel: ^3.0.0
 
 dev_dependencies:
   analyzer: null
