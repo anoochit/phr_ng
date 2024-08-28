@@ -15,7 +15,7 @@ class AskaiView extends GetView<AskaiController> {
       onTap: () => FocusManager.instance.primaryFocus?.unfocus(),
       child: Scaffold(
         appBar: AppBar(
-          title: const Text('AskaiView'),
+          title: Text('ask_ai'.tr),
           centerTitle: true,
         ),
         body: Column(

@@ -100,7 +100,7 @@ class AskaiController extends GetxController {
   void scrollDown() {
     scrollController.animateTo(
       scrollController.position.maxScrollExtent,
-      curve: Curves.bounceInOut,
+      curve: Curves.easeIn,
       duration: const Duration(seconds: 1),
     );
   }
@@ -108,14 +108,20 @@ class AskaiController extends GetxController {
   String buildMessageContext() {
     AppController appController = Get.find<AppController>();
 
-    final bmiStatus = appController.listBMI.last.status.name;
-    final bloodPressureStatus =
-        appController.listBloodPressure.last.status.name;
-    final bloodGlucoseStatus = appController.listGlucose.last.status.name;
+    if (appController.listBMI.isNotEmpty &&
+        appController.listBloodPressure.isNotEmpty &&
+        appController.listGlucose.isNotEmpty) {
+      final bmiStatus = appController.listBMI.last.status.name;
+      final bloodPressureStatus =
+          appController.listBloodPressure.last.status.name;
+      final bloodGlucoseStatus = appController.listGlucose.last.status.name;
 
-    final message =
-        '${bmiStatus.tr}, ${bloodPressureStatus.tr}, ${bloodGlucoseStatus.tr}';
+      final message =
+          '${bmiStatus.tr}, ${bloodPressureStatus.tr}, ${bloodGlucoseStatus.tr}';
 
-    return message;
+      return message;
+    } else {
+      return '';
+    }
   }
 }

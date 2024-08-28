@@ -172,7 +172,7 @@ class Locales {
     'enter_glucose_mgdl': 'Glucose (mg/dL)',
     'please_enter_glucose': 'Please enter Gluecose value',
     'ask_ai': 'Ask AI',
-    'type_your_message_here': 'Typr your message here...',
+    'type_your_message_here': 'Type your message here...',
     'choose_menu_ask_question': 'Choose menu below or ask question',
     'processing': 'Loading',
     'health_info': 'According to my health information: @context .',
